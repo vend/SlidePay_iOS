@@ -1,0 +1,418 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0E8ECE1117B2C7DD000EFE1C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E8ECE1017B2C7DD000EFE1C /* Foundation.framework */; };
+		0E8ECE1617B2C7DD000EFE1C /* SlidePayCore.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0E8ECE1517B2C7DD000EFE1C /* SlidePayCore.h */; };
+		0E8ECE1817B2C7DD000EFE1C /* SlidePayCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8ECE1717B2C7DD000EFE1C /* SlidePayCore.m */; };
+		0E8ECE2017B2C7DD000EFE1C /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E8ECE1F17B2C7DD000EFE1C /* SenTestingKit.framework */; };
+		0E8ECE2217B2C7DD000EFE1C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E8ECE2117B2C7DD000EFE1C /* UIKit.framework */; };
+		0E8ECE2317B2C7DD000EFE1C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E8ECE1017B2C7DD000EFE1C /* Foundation.framework */; };
+		0E8ECE2617B2C7DD000EFE1C /* libSlidePayCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E8ECE0D17B2C7DD000EFE1C /* libSlidePayCore.a */; };
+		0E8ECE2C17B2C7DD000EFE1C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E8ECE2A17B2C7DD000EFE1C /* InfoPlist.strings */; };
+		0E8ECE2F17B2C7DD000EFE1C /* SlidePayCoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8ECE2E17B2C7DD000EFE1C /* SlidePayCoreTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0E8ECE2417B2C7DD000EFE1C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0E8ECE0517B2C7DD000EFE1C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0E8ECE0C17B2C7DD000EFE1C;
+			remoteInfo = SlidePayCore;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0E8ECE0B17B2C7DD000EFE1C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+				0E8ECE1617B2C7DD000EFE1C /* SlidePayCore.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0E8ECE0D17B2C7DD000EFE1C /* libSlidePayCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSlidePayCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E8ECE1017B2C7DD000EFE1C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0E8ECE1417B2C7DD000EFE1C /* SlidePayCore-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SlidePayCore-Prefix.pch"; sourceTree = "<group>"; };
+		0E8ECE1517B2C7DD000EFE1C /* SlidePayCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SlidePayCore.h; sourceTree = "<group>"; };
+		0E8ECE1717B2C7DD000EFE1C /* SlidePayCore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SlidePayCore.m; sourceTree = "<group>"; };
+		0E8ECE1E17B2C7DD000EFE1C /* SlidePayCoreTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SlidePayCoreTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E8ECE1F17B2C7DD000EFE1C /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		0E8ECE2117B2C7DD000EFE1C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		0E8ECE2917B2C7DD000EFE1C /* SlidePayCoreTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SlidePayCoreTests-Info.plist"; sourceTree = "<group>"; };
+		0E8ECE2B17B2C7DD000EFE1C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0E8ECE2D17B2C7DD000EFE1C /* SlidePayCoreTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SlidePayCoreTests.h; sourceTree = "<group>"; };
+		0E8ECE2E17B2C7DD000EFE1C /* SlidePayCoreTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SlidePayCoreTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0E8ECE0A17B2C7DD000EFE1C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E8ECE1117B2C7DD000EFE1C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E8ECE1A17B2C7DD000EFE1C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E8ECE2017B2C7DD000EFE1C /* SenTestingKit.framework in Frameworks */,
+				0E8ECE2217B2C7DD000EFE1C /* UIKit.framework in Frameworks */,
+				0E8ECE2317B2C7DD000EFE1C /* Foundation.framework in Frameworks */,
+				0E8ECE2617B2C7DD000EFE1C /* libSlidePayCore.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0E8ECE0417B2C7DD000EFE1C = {
+			isa = PBXGroup;
+			children = (
+				0E8ECE1217B2C7DD000EFE1C /* SlidePayCore */,
+				0E8ECE2717B2C7DD000EFE1C /* SlidePayCoreTests */,
+				0E8ECE0F17B2C7DD000EFE1C /* Frameworks */,
+				0E8ECE0E17B2C7DD000EFE1C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0E8ECE0E17B2C7DD000EFE1C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0E8ECE0D17B2C7DD000EFE1C /* libSlidePayCore.a */,
+				0E8ECE1E17B2C7DD000EFE1C /* SlidePayCoreTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0E8ECE0F17B2C7DD000EFE1C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0E8ECE1017B2C7DD000EFE1C /* Foundation.framework */,
+				0E8ECE1F17B2C7DD000EFE1C /* SenTestingKit.framework */,
+				0E8ECE2117B2C7DD000EFE1C /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0E8ECE1217B2C7DD000EFE1C /* SlidePayCore */ = {
+			isa = PBXGroup;
+			children = (
+				0E8ECE1517B2C7DD000EFE1C /* SlidePayCore.h */,
+				0E8ECE1717B2C7DD000EFE1C /* SlidePayCore.m */,
+				0E8ECE1317B2C7DD000EFE1C /* Supporting Files */,
+			);
+			path = SlidePayCore;
+			sourceTree = "<group>";
+		};
+		0E8ECE1317B2C7DD000EFE1C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0E8ECE1417B2C7DD000EFE1C /* SlidePayCore-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0E8ECE2717B2C7DD000EFE1C /* SlidePayCoreTests */ = {
+			isa = PBXGroup;
+			children = (
+				0E8ECE2D17B2C7DD000EFE1C /* SlidePayCoreTests.h */,
+				0E8ECE2E17B2C7DD000EFE1C /* SlidePayCoreTests.m */,
+				0E8ECE2817B2C7DD000EFE1C /* Supporting Files */,
+			);
+			path = SlidePayCoreTests;
+			sourceTree = "<group>";
+		};
+		0E8ECE2817B2C7DD000EFE1C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0E8ECE2917B2C7DD000EFE1C /* SlidePayCoreTests-Info.plist */,
+				0E8ECE2A17B2C7DD000EFE1C /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0E8ECE0C17B2C7DD000EFE1C /* SlidePayCore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0E8ECE3217B2C7DD000EFE1C /* Build configuration list for PBXNativeTarget "SlidePayCore" */;
+			buildPhases = (
+				0E8ECE0917B2C7DD000EFE1C /* Sources */,
+				0E8ECE0A17B2C7DD000EFE1C /* Frameworks */,
+				0E8ECE0B17B2C7DD000EFE1C /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SlidePayCore;
+			productName = SlidePayCore;
+			productReference = 0E8ECE0D17B2C7DD000EFE1C /* libSlidePayCore.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		0E8ECE1D17B2C7DD000EFE1C /* SlidePayCoreTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0E8ECE3517B2C7DD000EFE1C /* Build configuration list for PBXNativeTarget "SlidePayCoreTests" */;
+			buildPhases = (
+				0E8ECE1917B2C7DD000EFE1C /* Sources */,
+				0E8ECE1A17B2C7DD000EFE1C /* Frameworks */,
+				0E8ECE1B17B2C7DD000EFE1C /* Resources */,
+				0E8ECE1C17B2C7DD000EFE1C /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0E8ECE2517B2C7DD000EFE1C /* PBXTargetDependency */,
+			);
+			name = SlidePayCoreTests;
+			productName = SlidePayCoreTests;
+			productReference = 0E8ECE1E17B2C7DD000EFE1C /* SlidePayCoreTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0E8ECE0517B2C7DD000EFE1C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = SlidePay;
+			};
+			buildConfigurationList = 0E8ECE0817B2C7DD000EFE1C /* Build configuration list for PBXProject "SlidePayCore" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0E8ECE0417B2C7DD000EFE1C;
+			productRefGroup = 0E8ECE0E17B2C7DD000EFE1C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0E8ECE0C17B2C7DD000EFE1C /* SlidePayCore */,
+				0E8ECE1D17B2C7DD000EFE1C /* SlidePayCoreTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0E8ECE1B17B2C7DD000EFE1C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E8ECE2C17B2C7DD000EFE1C /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0E8ECE1C17B2C7DD000EFE1C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0E8ECE0917B2C7DD000EFE1C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E8ECE1817B2C7DD000EFE1C /* SlidePayCore.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E8ECE1917B2C7DD000EFE1C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E8ECE2F17B2C7DD000EFE1C /* SlidePayCoreTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0E8ECE2517B2C7DD000EFE1C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0E8ECE0C17B2C7DD000EFE1C /* SlidePayCore */;
+			targetProxy = 0E8ECE2417B2C7DD000EFE1C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0E8ECE2A17B2C7DD000EFE1C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0E8ECE2B17B2C7DD000EFE1C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0E8ECE3017B2C7DD000EFE1C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		0E8ECE3117B2C7DD000EFE1C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0E8ECE3317B2C7DD000EFE1C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/SlidePayCore.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SlidePayCore/SlidePayCore-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		0E8ECE3417B2C7DD000EFE1C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/SlidePayCore.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SlidePayCore/SlidePayCore-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		0E8ECE3617B2C7DD000EFE1C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SlidePayCore/SlidePayCore-Prefix.pch";
+				INFOPLIST_FILE = "SlidePayCoreTests/SlidePayCoreTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		0E8ECE3717B2C7DD000EFE1C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SlidePayCore/SlidePayCore-Prefix.pch";
+				INFOPLIST_FILE = "SlidePayCoreTests/SlidePayCoreTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0E8ECE0817B2C7DD000EFE1C /* Build configuration list for PBXProject "SlidePayCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E8ECE3017B2C7DD000EFE1C /* Debug */,
+				0E8ECE3117B2C7DD000EFE1C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0E8ECE3217B2C7DD000EFE1C /* Build configuration list for PBXNativeTarget "SlidePayCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E8ECE3317B2C7DD000EFE1C /* Debug */,
+				0E8ECE3417B2C7DD000EFE1C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		0E8ECE3517B2C7DD000EFE1C /* Build configuration list for PBXNativeTarget "SlidePayCoreTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E8ECE3617B2C7DD000EFE1C /* Debug */,
+				0E8ECE3717B2C7DD000EFE1C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0E8ECE0517B2C7DD000EFE1C /* Project object */;
+}

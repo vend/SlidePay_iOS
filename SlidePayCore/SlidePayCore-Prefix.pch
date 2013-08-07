@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'SlidePayCore' target in the 'SlidePayCore' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+#endif
