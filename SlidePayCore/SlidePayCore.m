@@ -7,10 +7,15 @@
 //
 
 #import "SlidePayCore.h"
+#import <AudioToolbox/AudioToolbox.h>
+#import "AudioCaptureRecorder.h"
+#import "MTSCRA.h"
+#import <ExternalAccessory/ExternalAccessory.h>
 
 
 static SlidePayCore *_shared_model = nil;
-
+static MTSCRA *mtSCRALib;
+static AudioCaptureRecorder *myRecorder;
 
 
 
@@ -24,7 +29,7 @@ static SlidePayCore *_shared_model = nil;
     SlidePayLoginObject *loginObject;
 }
 
-@synthesize slidePayCoreDelegate;
+@synthesize slidePayCoreDelegate, amountToCharge, paymentDelegate, userMaster;
 
 + (SlidePayCore *) sharedInstance {
     if (!_shared_model) {
@@ -203,6 +208,323 @@ static SlidePayCore *_shared_model = nil;
 - (NSURL *) urlByAppendingPath: (NSString *) path {
     return [NSURL URLWithString:path relativeToURL:[NSURL URLWithString:myEndpointString]];
 }
+
+#pragma mark - Payment Section
+/*
+ Payment Section
+ */
+- (void) setUpRambler {
+    myRecorder = [AudioCaptureRecorder sharedInstance];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(obtainedRamblerSwipe:) name:@"rambler_swipe" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ramblerSwipeFailed) name:@"swipe_fail" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(whenRamblerIsConnected) name:@"rambler_on" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(whenRamblerIsDisconnected) name:@"rambler_off" object:nil];
+}
+
+- (void) whenRamblerIsConnected {
+    [self.paymentDelegate ramblerConnected:YES];
+}
+
+- (void) whenRamblerIsDisconnected {
+    [self.paymentDelegate ramblerConnected:NO];
+}
+
+- (void) obtainedRamblerSwipe: (NSNotification *) notification {
+    NSDictionary *ramblerDictionary = [notification userInfo];
+    
+    NSMutableDictionary *my_simple_payment = [NSMutableDictionary dictionaryWithDictionary:ramblerDictionary];
+    [self createPaymentDictionaryFromEncryptedSwipe:my_simple_payment];
+    
+}
+
+- (void) ramblerSwipeFailed {
+    [self.paymentDelegate swipeFailed];
+}
+
+- (void) createPaymentDictionaryFromEncryptedSwipe: (NSMutableDictionary *) my_encrypted_dictionary {
+    NSDictionary *my_add_on_dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                          [NSNumber numberWithDouble:amountToCharge], @"amount",
+                                          userMaster.companyID, @"company_id",
+                                          userMaster.locationID, @"location_id",
+                                          @"CreditCard", @"method",
+                                          userMaster.firstName, @"first_name",
+                                          userMaster.lastName, @"last_name"
+                                          , nil];
+    
+    [my_encrypted_dictionary addEntriesFromDictionary:my_add_on_dictionary];
+    [self.paymentDelegate paymentDictionaryCreated:my_encrypted_dictionary];
+}
+
+
+
+- (void) setUpMagTekSwiper {
+    mtSCRALib = [[MTSCRA alloc] init];
+    [mtSCRALib listenForEvents:(TRANS_EVENT_OK|TRANS_EVENT_START|TRANS_EVENT_ERROR)];
+    [mtSCRALib setDeviceType:(MAGTEKIDYNAMO)];
+    [mtSCRALib setDeviceProtocolString:@"com.magtek.idynamo"];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(devConnStatusChange) name:@"devConnectionNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(trackDataReady:) name:@"trackDataReadyNotification" object:nil];
+    
+    
+}
+
+- (void) turnOnAudioSwipeDetection: (BOOL) on {
+    if (on) {
+        [[AudioCaptureRecorder sharedInstance].myReaderController startReader];
+    }
+    [AudioCaptureRecorder sharedInstance].isRamblerActive = on;
+}
+
+- (void)devConnStatusChange {
+    BOOL isDeviceConnected = [mtSCRALib isDeviceConnected];
+    if (isDeviceConnected)
+        [self.paymentDelegate magtekConnected:YES];
+    else
+        [self.paymentDelegate magtekConnected:NO];
+}
+
+- (void)trackDataReady:(NSNotification *)notification
+{
+    NSNumber *status = [[notification userInfo]
+                        valueForKey:@"status"];
+    [self performSelectorOnMainThread:@selector(onDataEvent:) withObject:status waitUntilDone:YES];
+}
+
+- (void)onDataEvent:(id)status
+{
+	switch ([status intValue]) {
+        case TRANS_STATUS_OK: {
+            BOOL bTrackError;
+            NSString * pstrTrackDecodeStatus = [mtSCRALib getTrackDecodeStatus];
+            @try
+            {
+                if(pstrTrackDecodeStatus)
+                {
+                    if(pstrTrackDecodeStatus.length >= 6)
+                    {
+                        //need to call method finishWithSuccess because we got the valid data, we also need to fill out the checkoutModel
+                        //Time to form the necessary information
+                        
+                        [self processMTSCRATrack2Read];
+                        
+                        [mtSCRALib clearBuffers];
+                        
+                    }
+                    else {
+                        [self.paymentDelegate swipeFailed];
+                    }
+                }
+                
+            }
+            @catch(NSException * e)
+            {
+            }
+            
+            if(bTrackError==NO)
+            {
+                [mtSCRALib clearBuffers];
+            }
+            
+            
+            break;
+        }
+        case TRANS_STATUS_START: {
+            [self.paymentDelegate magtekProcessingStarted];
+            break;
+        }
+        case TRANS_STATUS_ERROR:
+            [self.paymentDelegate swipeFailed];
+            break;
+            
+        default:
+            break;
+    }
+    
+    
+}
+
+
+
+/*
+ When we get a MagTek swipe, we will need to create a payment dictionary out of it.
+ */
+- (void) processMTSCRATrack2Read {
+    
+    [self checkIfLocationManagerIsOn];
+    
+    NSString *expiration_string = [mtSCRALib getCardExpDate];
+    
+    //need to return something bad
+    if (expiration_string.length < 4)
+        return ;
+    
+    
+    
+    NSString *cc_expiration_year = [expiration_string substringToIndex:2];
+    NSString *cc_expiration_month = [expiration_string substringFromIndex:2];
+    
+    NSMutableDictionary *my_encrypted_swipe_args = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                                    cc_expiration_month, @"cc_expiry_month",
+                                                    cc_expiration_year, @"cc_expiry_year",
+                                                    [mtSCRALib getCardName], @"cc_name_on_card",
+                                                    [mtSCRALib getTrack2], @"cc_track2data",
+                                                    [SlidePayCore obtainCardTypeFromRedacted: [mtSCRALib getCardIIN]], @"cc_type",
+                                                    [mtSCRALib getDeviceSerial], @"encryption_device_serial",
+                                                    [mtSCRALib getKSN], @"encryption_ksn",
+                                                    [mtSCRALib getCardLast4], @"cc_redacted_number",
+                                                    @"magtek", @"encryption_vendor",
+                                                    [NSNumber numberWithDouble:myRecorder.myLocationManager.location.coordinate.latitude], @"latitude",
+                                                    [NSNumber numberWithDouble:myRecorder.myLocationManager.location.coordinate.longitude], @"longitude"
+                                                    , nil];
+    
+    
+    
+    
+    [self createPaymentDictionaryFromEncryptedSwipe:my_encrypted_swipe_args];
+    
+}
+
+- (void) checkIfLocationManagerIsOn {
+    if (myRecorder.myLocationManager.location.coordinate.latitude == 0 || myRecorder.myLocationManager.location.coordinate.longitude == 0) {
+        [myRecorder startupLocationManager];
+    }
+}
+
+- (NSDictionary *) createCNPWithZip: (NSString *) zipCode withCVV: (NSString *) cvv withExpiryMonth: (NSString *) expiryMonth withExpiryYear: (NSString *) expiryYear withCardNumber: (NSString *) cardNumber
+{
+    
+    [self checkIfLocationManagerIsOn];
+    
+    
+    NSString *ccType = [SlidePayCore obtainCardStringFromCardType: [SlidePayCore obtainCardTypeFromCardNumber: cardNumber]];
+    NSMutableDictionary *typedInArgs = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                             zipCode, @"cc_billing_zip",
+                                             cvv, @"cc_cvv2",
+                                             expiryMonth, @"cc_expiry_month",
+                                             expiryYear, @"cc_expiry_year",
+                                             cardNumber, @"cc_number",
+                                             [NSNumber numberWithInt:0], @"cc_present",
+                                             ccType, @"cc_type", nil];
+    
+    NSDictionary *addOnDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                          [NSNumber numberWithDouble:self.amountToCharge], @"amount",
+                                          userMaster.companyID, @"company_id",
+                                          userMaster.locationID, @"location_id",
+                                          @"CreditCard", @"method",
+                                          userMaster.firstName, @"first_name",
+                                          userMaster.lastName, @"last_name",
+                                          [NSNumber numberWithDouble:myRecorder.myLocationManager.location.coordinate.latitude], @"latitude",
+                                          [NSNumber numberWithDouble:myRecorder.myLocationManager.location.coordinate.longitude], @"longitude"
+                                          , nil];
+    
+    [typedInArgs addEntriesFromDictionary:addOnDictionary];
+    
+    return typedInArgs;
+}
+
+
++ (NSString *) obtainCardTypeFromRedacted: (NSString *) cardIIN {
+    
+    //The cardIIN will look like ####***.  Therefore, we need to just make sure that the length is greater than  or equal to 4.
+    if (cardIIN.length < 4) {
+        return @"Unable to determine cardtype";
+    }
+    else if ([cardIIN characterAtIndex:0] == '4') {
+        return @"Visa";
+    }
+    NSString *myFirstTwoDigits = [cardIIN substringToIndex:2];
+    if ([myFirstTwoDigits intValue] >= 51 && [myFirstTwoDigits intValue] <= 55)
+        return @"MasterCard";
+    else if ([myFirstTwoDigits intValue] == 34 || [myFirstTwoDigits intValue] == 37)
+        return @"AmericanExpress";
+    else if ([myFirstTwoDigits intValue] == 36 || [myFirstTwoDigits intValue] == 38)
+        return @"MasterCard";
+    NSString *myFirstThreeDigits = [cardIIN substringToIndex:3];
+    if ([myFirstThreeDigits intValue] >= 300 && [myFirstThreeDigits intValue] <= 305)
+        return @"MasterCard";
+    NSString *myFirstFourDigits = [cardIIN substringToIndex:4];
+    if ([myFirstTwoDigits intValue] == 65 || [myFirstFourDigits intValue] == 6011)
+        return @"Discover";
+    return @"Unable to determine cardtype";
+}
+
+
++ (NSString *) obtainCardStringFromCardType : (CC_CARD_TYPE) cardType {
+    switch (cardType) {
+        case CC_AMEX:
+            return @"AmericanExpress";
+            break;
+        case CC_DISCOVER:
+            return @"Discover";
+            break;
+        case CC_MASTERCARD:
+            return @"MasterCard";
+            break;
+        case CC_VISA:
+            return @"Visa";
+            break;
+        default:
+            return @"";
+            break;
+    }
+}
+
+/*
+ obtainCardTypeFromCardNumber: We take in a string which contains the card number.  We then use our regex to determine what type of card this is and return it back.  If it there is an error, we will return CC_ERROR.
+ */
+
++ (CC_CARD_TYPE) obtainCardTypeFromCardNumber: (NSString*) card_number_string {
+    
+    NSString * visaPattern = @"^4[0-9]{12}(?:[0-9]{3})?$";
+    NSString * amexPattern = @"^3[47][0-9]{13}$";
+    NSString * discPattern = @"^6(?:011|5[0-9]{2})[0-9]{12}$";
+    NSString * masterPattern = @"^5[1-5][0-9]{14}$";
+    NSError * error;
+    NSRegularExpression * visaRegex = [NSRegularExpression regularExpressionWithPattern:visaPattern options:NSRegularExpressionCaseInsensitive error:&error];
+    NSRegularExpression * amexRegex = [NSRegularExpression regularExpressionWithPattern:amexPattern options:NSRegularExpressionCaseInsensitive error:&error];
+    NSRegularExpression * masterRegex = [NSRegularExpression regularExpressionWithPattern:masterPattern options:NSRegularExpressionCaseInsensitive error:&error];
+    NSRegularExpression * discRegex = [NSRegularExpression regularExpressionWithPattern:discPattern options:NSRegularExpressionCaseInsensitive error:&error];
+    
+    NSArray * visaMatches = [NSArray arrayWithArray:[visaRegex matchesInString:card_number_string
+                                                                       options:NSMatchingReportCompletion
+                                                                         range:NSMakeRange(0, [card_number_string length])]];
+    NSArray * matchesAmex = [NSArray arrayWithArray:
+                             [amexRegex matchesInString:card_number_string
+                                                options:NSMatchingReportCompletion
+                                                  range:NSMakeRange(0, [card_number_string length])]];
+    NSArray * matchesMaster = [NSArray arrayWithArray:
+                               [masterRegex matchesInString:card_number_string
+                                                    options:NSMatchingReportCompletion
+                                                      range:NSMakeRange(0, [card_number_string length])]];
+    NSArray * matchesDiscover = [NSArray arrayWithArray:
+                                 [discRegex matchesInString:card_number_string
+                                                    options:NSMatchingReportCompletion
+                                                      range:NSMakeRange(0, [card_number_string length])]];
+    
+    if(visaMatches.count > 0)
+        return CC_VISA;
+    else if(matchesAmex.count > 0)
+        return CC_AMEX;
+    else if(matchesDiscover.count > 0)
+        return CC_DISCOVER;
+    else if(matchesMaster.count > 0)
+        return CC_MASTERCARD;
+    else
+        return CC_ERROR;
+}
+
+
+/*
+ This is just a helper method which help you convert an NSArray or a NSDictionary to its equivalent JSON
+ */
++ (NSString *) convertIDToJSONString: (id) object {
+    NSError *error = nil;
+    NSData *json_data = [NSJSONSerialization dataWithJSONObject:object options:NSJSONWritingPrettyPrinted error:&error];
+    NSString *jsonString = [[NSString alloc] initWithData:json_data encoding:NSUTF8StringEncoding];
+    
+    return jsonString;
+}
+
 
 
 @end

@@ -16,6 +16,17 @@
 		0E8ECE2617B2C7DD000EFE1C /* libSlidePayCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E8ECE0D17B2C7DD000EFE1C /* libSlidePayCore.a */; };
 		0E8ECE2C17B2C7DD000EFE1C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E8ECE2A17B2C7DD000EFE1C /* InfoPlist.strings */; };
 		0E8ECE2F17B2C7DD000EFE1C /* SlidePayCoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8ECE2E17B2C7DD000EFE1C /* SlidePayCoreTests.m */; };
+		0EB81F0017B4750A00F5F65A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB81EFF17B4750A00F5F65A /* AudioToolbox.framework */; };
+		0EB81F0217B4751100F5F65A /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB81F0117B4751100F5F65A /* ExternalAccessory.framework */; };
+		0EB81F0417B4751A00F5F65A /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB81F0317B4751A00F5F65A /* libstdc++.dylib */; };
+		0EB81F0617B4751F00F5F65A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB81F0517B4751F00F5F65A /* MediaPlayer.framework */; };
+		0EB81F0817B4752600F5F65A /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB81F0717B4752600F5F65A /* CoreAudio.framework */; };
+		0EB81F0A17B4752C00F5F65A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB81F0917B4752C00F5F65A /* CoreLocation.framework */; };
+		0EB81F1317B475BD00F5F65A /* AudioCaptureRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EB81F0B17B475BD00F5F65A /* AudioCaptureRecorder.m */; };
+		0EB81F1417B475BD00F5F65A /* libMTSCRA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB81F0C17B475BD00F5F65A /* libMTSCRA.a */; };
+		0EB81F1517B475BD00F5F65A /* AudioReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0EB81F0E17B475BD00F5F65A /* AudioReader.cpp */; };
+		0EB81F1617B475BD00F5F65A /* libReaderAPI-1.3.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB81F1117B475BD00F5F65A /* libReaderAPI-1.3.1.a */; };
+		0EB81F1717B47AD400F5F65A /* SlidePayCoreEnumerations.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0EB81EFE17B46EE400F5F65A /* SlidePayCoreEnumerations.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +46,7 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				0EB81F1717B47AD400F5F65A /* SlidePayCoreEnumerations.h in CopyFiles */,
 				0E8ECE1617B2C7DD000EFE1C /* SlidePayCore.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -54,6 +66,21 @@
 		0E8ECE2B17B2C7DD000EFE1C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0E8ECE2D17B2C7DD000EFE1C /* SlidePayCoreTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SlidePayCoreTests.h; sourceTree = "<group>"; };
 		0E8ECE2E17B2C7DD000EFE1C /* SlidePayCoreTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SlidePayCoreTests.m; sourceTree = "<group>"; };
+		0EB81EFE17B46EE400F5F65A /* SlidePayCoreEnumerations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SlidePayCoreEnumerations.h; sourceTree = "<group>"; };
+		0EB81EFF17B4750A00F5F65A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		0EB81F0117B4751100F5F65A /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
+		0EB81F0317B4751A00F5F65A /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		0EB81F0517B4751F00F5F65A /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		0EB81F0717B4752600F5F65A /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		0EB81F0917B4752C00F5F65A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		0EB81F0B17B475BD00F5F65A /* AudioCaptureRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioCaptureRecorder.m; sourceTree = "<group>"; };
+		0EB81F0C17B475BD00F5F65A /* libMTSCRA.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMTSCRA.a; sourceTree = "<group>"; };
+		0EB81F0D17B475BD00F5F65A /* AudioCaptureRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioCaptureRecorder.h; sourceTree = "<group>"; };
+		0EB81F0E17B475BD00F5F65A /* AudioReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioReader.cpp; sourceTree = "<group>"; };
+		0EB81F0F17B475BD00F5F65A /* AudioReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioReader.h; sourceTree = "<group>"; };
+		0EB81F1017B475BD00F5F65A /* MTSCRA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSCRA.h; sourceTree = "<group>"; };
+		0EB81F1117B475BD00F5F65A /* libReaderAPI-1.3.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libReaderAPI-1.3.1.a"; sourceTree = "<group>"; };
+		0EB81F1217B475BD00F5F65A /* ReaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderController.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +88,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0EB81F0A17B4752C00F5F65A /* CoreLocation.framework in Frameworks */,
+				0EB81F0817B4752600F5F65A /* CoreAudio.framework in Frameworks */,
+				0EB81F0617B4751F00F5F65A /* MediaPlayer.framework in Frameworks */,
+				0EB81F0417B4751A00F5F65A /* libstdc++.dylib in Frameworks */,
+				0EB81F0217B4751100F5F65A /* ExternalAccessory.framework in Frameworks */,
+				0EB81F0017B4750A00F5F65A /* AudioToolbox.framework in Frameworks */,
 				0E8ECE1117B2C7DD000EFE1C /* Foundation.framework in Frameworks */,
+				0EB81F1417B475BD00F5F65A /* libMTSCRA.a in Frameworks */,
+				0EB81F1617B475BD00F5F65A /* libReaderAPI-1.3.1.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +117,12 @@
 		0E8ECE0417B2C7DD000EFE1C = {
 			isa = PBXGroup;
 			children = (
+				0EB81F0917B4752C00F5F65A /* CoreLocation.framework */,
+				0EB81F0717B4752600F5F65A /* CoreAudio.framework */,
+				0EB81F0517B4751F00F5F65A /* MediaPlayer.framework */,
+				0EB81F0317B4751A00F5F65A /* libstdc++.dylib */,
+				0EB81F0117B4751100F5F65A /* ExternalAccessory.framework */,
+				0EB81EFF17B4750A00F5F65A /* AudioToolbox.framework */,
 				0E8ECE1217B2C7DD000EFE1C /* SlidePayCore */,
 				0E8ECE2717B2C7DD000EFE1C /* SlidePayCoreTests */,
 				0E8ECE0F17B2C7DD000EFE1C /* Frameworks */,
@@ -111,9 +152,18 @@
 		0E8ECE1217B2C7DD000EFE1C /* SlidePayCore */ = {
 			isa = PBXGroup;
 			children = (
+				0EB81F0B17B475BD00F5F65A /* AudioCaptureRecorder.m */,
+				0EB81F0C17B475BD00F5F65A /* libMTSCRA.a */,
+				0EB81F0D17B475BD00F5F65A /* AudioCaptureRecorder.h */,
+				0EB81F0E17B475BD00F5F65A /* AudioReader.cpp */,
+				0EB81F0F17B475BD00F5F65A /* AudioReader.h */,
+				0EB81F1017B475BD00F5F65A /* MTSCRA.h */,
+				0EB81F1117B475BD00F5F65A /* libReaderAPI-1.3.1.a */,
+				0EB81F1217B475BD00F5F65A /* ReaderController.h */,
 				0E8ECE1517B2C7DD000EFE1C /* SlidePayCore.h */,
 				0E8ECE1717B2C7DD000EFE1C /* SlidePayCore.m */,
 				0E8ECE1317B2C7DD000EFE1C /* Supporting Files */,
+				0EB81EFE17B46EE400F5F65A /* SlidePayCoreEnumerations.h */,
 			);
 			path = SlidePayCore;
 			sourceTree = "<group>";
@@ -244,6 +294,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E8ECE1817B2C7DD000EFE1C /* SlidePayCore.m in Sources */,
+				0EB81F1317B475BD00F5F65A /* AudioCaptureRecorder.m in Sources */,
+				0EB81F1517B475BD00F5F65A /* AudioReader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,6 +388,10 @@
 				DSTROOT = /tmp/SlidePayCore.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SlidePayCore/SlidePayCore-Prefix.pch";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/SlidePayCore\"",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -348,6 +404,10 @@
 				DSTROOT = /tmp/SlidePayCore.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SlidePayCore/SlidePayCore-Prefix.pch";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/SlidePayCore\"",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
