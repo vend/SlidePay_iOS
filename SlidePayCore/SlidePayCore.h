@@ -58,7 +58,7 @@ typedef enum {
 
 - (void) loginWithEmail: (NSString *) emailAddress withPassword: (NSString *) password;
 
-@property (weak, nonatomic) id <SlidePayCoreDelegate> mySlidePayCoreDelegate;
+@property (weak, nonatomic) id <SlidePayCoreDelegate> slidePayCoreDelegate;
 
 @end
 

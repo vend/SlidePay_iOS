@@ -24,7 +24,7 @@ static SlidePayCore *_shared_model = nil;
     SlidePayLoginObject *loginObject;
 }
 
-@synthesize mySlidePayCoreDelegate;
+@synthesize slidePayCoreDelegate;
 
 + (SlidePayCore *) sharedInstance {
     if (!_shared_model) {
@@ -51,7 +51,7 @@ static SlidePayCore *_shared_model = nil;
     //We first need to make sure that the e-mail address provided and password passes basic validation (can't be nil or empty).
     if (![self validateLoginFieldsWithEmail:emailAddress withPassword:password]) {
         loginError = [NSError errorWithDomain:@"Attempting to login with invalid credentials" code:LOGIN_FAILURE_INVALID_CREDENTIALS userInfo:nil];
-        return [self.mySlidePayCoreDelegate loginRequestCompletedWithData:nil withError:loginError];
+        return [self.slidePayCoreDelegate loginRequestCompletedWithData:nil withError:loginError];
     }
     
     //Next we make to supervisor to see which endpoint we need to specify
@@ -63,7 +63,7 @@ static SlidePayCore *_shared_model = nil;
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         if (error) {
             NSError *supervisorError = [NSError errorWithDomain:@"Unable to obtain endpoint from e-mail address" code:LOGIN_FAILURE_INVALID_ACCOUNT userInfo:nil];
-            [self.mySlidePayCoreDelegate loginRequestCompletedWithData:nil withError:supervisorError];
+            [self.slidePayCoreDelegate loginRequestCompletedWithData:nil withError:supervisorError];
         }
         else {
             myPassword = password;
@@ -92,7 +92,7 @@ static SlidePayCore *_shared_model = nil;
     }
     else {
         NSError *supervisorError = [NSError errorWithDomain:@"Unable to obtain endpoint from e-mail address" code:LOGIN_FAILURE_INVALID_ACCOUNT userInfo:nil];
-        [self.mySlidePayCoreDelegate loginRequestCompletedWithData:nil withError:supervisorError];
+        [self.slidePayCoreDelegate loginRequestCompletedWithData:nil withError:supervisorError];
     }
         
 }
@@ -108,7 +108,7 @@ static SlidePayCore *_shared_model = nil;
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         if (error) {
             NSError * loginError = [NSError errorWithDomain:@"Attempting to login with invalid credentials" code:LOGIN_FAILURE_INVALID_CREDENTIALS userInfo:nil];
-            [self.mySlidePayCoreDelegate loginRequestCompletedWithData:nil withError:loginError];
+            [self.slidePayCoreDelegate loginRequestCompletedWithData:nil withError:loginError];
         }
        else {
            [self processLoginData:data];
@@ -132,7 +132,7 @@ static SlidePayCore *_shared_model = nil;
     }
     else {
         NSError * loginError = [NSError errorWithDomain:@"Attempting to login with invalid credentials" code:LOGIN_FAILURE_INVALID_CREDENTIALS userInfo:nil];
-        [self.mySlidePayCoreDelegate loginRequestCompletedWithData:nil withError:loginError];
+        [self.slidePayCoreDelegate loginRequestCompletedWithData:nil withError:loginError];
     }
 
 }
@@ -145,7 +145,7 @@ static SlidePayCore *_shared_model = nil;
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         if (error) {
             NSError * tokenDetailError = [NSError errorWithDomain:@"Unable to retrieve information from token detail" code:LOGIN_FAILURE_CONNECTIVITY userInfo:nil];
-            [self.mySlidePayCoreDelegate loginRequestCompletedWithData:nil withError:tokenDetailError];
+            [self.slidePayCoreDelegate loginRequestCompletedWithData:nil withError:tokenDetailError];
         }
         else {
             [self processTokenDetailData:data];
@@ -183,11 +183,11 @@ static SlidePayCore *_shared_model = nil;
         temporaryUserMaster.locationID = [NSNumber numberWithInt:[[dataDictionary objectForKey:@"location_id"] intValue]];
         loginObject.slidePayUser = temporaryUserMaster;
         
-        [self.mySlidePayCoreDelegate loginRequestCompletedWithData:loginObject withError:nil];
+        [self.slidePayCoreDelegate loginRequestCompletedWithData:loginObject withError:nil];
     }
     else {
         NSError * tokenDetailError = [NSError errorWithDomain:@"Unable to retrieve information from token detail" code:LOGIN_FAILURE_CONNECTIVITY userInfo:nil];
-        [self.mySlidePayCoreDelegate loginRequestCompletedWithData:nil withError:tokenDetailError];
+        [self.slidePayCoreDelegate loginRequestCompletedWithData:nil withError:tokenDetailError];
     }
 }
 
