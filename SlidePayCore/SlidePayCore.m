@@ -68,6 +68,7 @@ static AudioCaptureRecorder *myRecorder;
     request.HTTPMethod = @"GET";
     [request setValue:emailAddress forHTTPHeaderField:@"x-cube-email"];
     
+    
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         if (error) {
             NSError *supervisorError = [NSError errorWithDomain:@"Unable to obtain endpoint from e-mail address" code:LOGIN_FAILURE_INVALID_ACCOUNT userInfo:nil];
@@ -223,6 +224,11 @@ static AudioCaptureRecorder *myRecorder;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ramblerSwipeFailed) name:@"swipe_fail" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(whenRamblerIsConnected) name:@"rambler_on" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(whenRamblerIsDisconnected) name:@"rambler_off" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(whenAudioDecodingStart) name:@"audio_decoding_start" object:nil];
+}
+
+- (void) whenAudioDecodingStart {
+    [self.slidePayCoreDelegate readerProcessingStarted:DEVICE_ENCRYPTED_AUDIO];
 }
 
 - (void) whenRamblerIsConnected {
@@ -261,23 +267,20 @@ static AudioCaptureRecorder *myRecorder;
 }
 
 - (void) sendPaymentDictionaryToBackend: (NSDictionary *) paymentDictionary {
-    NSLog(@"%@", paymentDictionary);
-    
     
     if (![paymentDictionary objectForKey:@"latitude"] || ![paymentDictionary objectForKey:@"longitude"]) {
         NSError *error = [NSError errorWithDomain:@"No location data.  Please turn on location services" code:PAYMENT_FAILURE_NO_LOCATION userInfo:nil];
         [self.slidePayCoreDelegate paymentFinishedWithResponse:nil withError:error];
     }
     else {
-        request.HTTPMethod = @"POST";
-        request.URL = [[SlidePayCore sharedInstance] urlByAppendingPath:@"payment/simple"];
         
-        NSLog(@"%@", request.URL);
+        NSMutableURLRequest *paymentURLRequest = [self prepareURLRequest:[NSMutableURLRequest requestWithURL:[[SlidePayCore sharedInstance] urlByAppendingPath:@"payment/simple"]]];
+        paymentURLRequest.HTTPMethod = @"POST";
         
         NSError *writeError = nil;
-        request.HTTPBody = [NSJSONSerialization dataWithJSONObject:paymentDictionary options:NSJSONWritingPrettyPrinted error:&writeError];
+        paymentURLRequest.HTTPBody = [NSJSONSerialization dataWithJSONObject:paymentDictionary options:NSJSONWritingPrettyPrinted error:&writeError];
         
-        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        [NSURLConnection sendAsynchronousRequest:paymentURLRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
             if (error) {
                 NSError *paymentError = [NSError errorWithDomain:@"Unable to process payment" code:LOGIN_FAILURE_OTHER userInfo:nil];
                 [self.slidePayCoreDelegate paymentFinishedWithResponse:nil withError:paymentError];
@@ -368,7 +371,7 @@ static AudioCaptureRecorder *myRecorder;
             break;
         }
         case TRANS_STATUS_START: {
-            [self.slidePayCoreDelegate magtekProcessingStarted];
+            [self.slidePayCoreDelegate readerProcessingStarted:DEVICE_MAGTEK_IDYNAMO];
             break;
         }
         case TRANS_STATUS_ERROR:
@@ -463,10 +466,10 @@ static AudioCaptureRecorder *myRecorder;
 
 //refundPayment
 - (void) refundPayment: (int) paymentID {
-    request.URL = [[SlidePayCore sharedInstance] urlByAppendingPath:[NSString stringWithFormat:@"payment/refund/%d", paymentID]];
-    request.HTTPMethod = @"POST";
+    NSMutableURLRequest *refundURLRequest = [self prepareURLRequest:[NSMutableURLRequest requestWithURL:[[SlidePayCore sharedInstance] urlByAppendingPath:[NSString stringWithFormat:@"payment/refund/%d", paymentID]]]];
+    refundURLRequest.HTTPMethod = @"POST";
     
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+    [NSURLConnection sendAsynchronousRequest:refundURLRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         if (error) {
             [self.slidePayCoreDelegate refundFinishedWithResponse:nil withError:error];
         }
@@ -477,6 +480,13 @@ static AudioCaptureRecorder *myRecorder;
         }
     }];
     
+}
+
+- (NSMutableURLRequest *) prepareURLRequest: (NSMutableURLRequest *) urlRequest {
+    [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [urlRequest setValue:myUserToken forHTTPHeaderField:@"x-cube-token"];
+    
+    return urlRequest;
 }
 
 

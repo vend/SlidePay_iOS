@@ -34,7 +34,6 @@
 - (void) swipeFailed;
 - (void) readerConnected: (BOOL) flag withType: (DEVICE_TYPE) type;
 - (void) readerProcessingStarted: (DEVICE_TYPE) type;
-- (void) magtekProcessingStarted;
 
 @end
 
