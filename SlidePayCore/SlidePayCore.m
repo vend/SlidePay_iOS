@@ -29,11 +29,14 @@ static AudioCaptureRecorder *myRecorder;
     SlidePayLoginObject *loginObject;
 }
 
-@synthesize slidePayCoreDelegate, amountToCharge, paymentDelegate, userMaster;
+@synthesize slidePayCoreDelegate, amountToCharge, userMaster;
 
 + (SlidePayCore *) sharedInstance {
     if (!_shared_model) {
         _shared_model = [[SlidePayCore alloc] init];
+        [_shared_model setUpRambler];
+        [_shared_model setUpMagTekSwiper];
+        [mtSCRALib openDevice];
     }
     
     return _shared_model;
@@ -109,6 +112,7 @@ static AudioCaptureRecorder *myRecorder;
     request.HTTPMethod = @"GET";
     [request setValue:myEmailAddress forHTTPHeaderField:@"x-cube-email"];
     [request setValue:myPassword forHTTPHeaderField:@"x-cube-password"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         if (error) {
@@ -180,13 +184,13 @@ static AudioCaptureRecorder *myRecorder;
             loginObject.userPermissionLevel = IS_CLERK;
         
         //Need to setup the user detail
-        SlidePayUserMaster *temporaryUserMaster = [[SlidePayUserMaster alloc] init];
-        temporaryUserMaster.firstName = [dataDictionary objectForKey:@"first_name"];
-        temporaryUserMaster.lastName = [dataDictionary objectForKey:@"last_name"];
-        temporaryUserMaster.userMasterID = [NSNumber numberWithInt:[[dataDictionary objectForKey:@"user_master_id"] intValue]];
-        temporaryUserMaster.companyID = [NSNumber numberWithInt:[[dataDictionary objectForKey:@"company_id"] intValue]];
-        temporaryUserMaster.locationID = [NSNumber numberWithInt:[[dataDictionary objectForKey:@"location_id"] intValue]];
-        loginObject.slidePayUser = temporaryUserMaster;
+        self.userMaster = [[SlidePayUserMaster alloc] init];
+        self.userMaster.firstName = [dataDictionary objectForKey:@"first_name"];
+        self.userMaster.lastName = [dataDictionary objectForKey:@"last_name"];
+        self.userMaster.userMasterID = [NSNumber numberWithInt:[[dataDictionary objectForKey:@"user_master_id"] intValue]];
+        self.userMaster.companyID = [NSNumber numberWithInt:[[dataDictionary objectForKey:@"company_id"] intValue]];
+        self.userMaster.locationID = [NSNumber numberWithInt:[[dataDictionary objectForKey:@"location_id"] intValue]];
+        loginObject.slidePayUser = self.userMaster;
         
         [self.slidePayCoreDelegate loginRequestCompletedWithData:loginObject withError:nil];
     }
@@ -222,11 +226,11 @@ static AudioCaptureRecorder *myRecorder;
 }
 
 - (void) whenRamblerIsConnected {
-    [self.paymentDelegate ramblerConnected:YES];
+    [self.slidePayCoreDelegate readerConnected:YES withType:DEVICE_ENCRYPTED_AUDIO];
 }
 
 - (void) whenRamblerIsDisconnected {
-    [self.paymentDelegate ramblerConnected:NO];
+    [self.slidePayCoreDelegate readerConnected:NO withType:DEVICE_ENCRYPTED_AUDIO];
 }
 
 - (void) obtainedRamblerSwipe: (NSNotification *) notification {
@@ -238,7 +242,7 @@ static AudioCaptureRecorder *myRecorder;
 }
 
 - (void) ramblerSwipeFailed {
-    [self.paymentDelegate swipeFailed];
+    [self.slidePayCoreDelegate swipeFailed];
 }
 
 - (void) createPaymentDictionaryFromEncryptedSwipe: (NSMutableDictionary *) my_encrypted_dictionary {
@@ -252,8 +256,43 @@ static AudioCaptureRecorder *myRecorder;
                                           , nil];
     
     [my_encrypted_dictionary addEntriesFromDictionary:my_add_on_dictionary];
-    [self.paymentDelegate paymentDictionaryCreated:my_encrypted_dictionary];
+    
+    [self sendPaymentDictionaryToBackend:my_encrypted_dictionary];
 }
+
+- (void) sendPaymentDictionaryToBackend: (NSDictionary *) paymentDictionary {
+    NSLog(@"%@", paymentDictionary);
+    
+    
+    if (![paymentDictionary objectForKey:@"latitude"] || ![paymentDictionary objectForKey:@"longitude"]) {
+        NSError *error = [NSError errorWithDomain:@"No location data.  Please turn on location services" code:PAYMENT_FAILURE_NO_LOCATION userInfo:nil];
+        [self.slidePayCoreDelegate paymentFinishedWithResponse:nil withError:error];
+    }
+    else {
+        request.HTTPMethod = @"POST";
+        request.URL = [[SlidePayCore sharedInstance] urlByAppendingPath:@"payment/simple"];
+        
+        NSLog(@"%@", request.URL);
+        
+        NSError *writeError = nil;
+        request.HTTPBody = [NSJSONSerialization dataWithJSONObject:paymentDictionary options:NSJSONWritingPrettyPrinted error:&writeError];
+        
+        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+            if (error) {
+                NSError *paymentError = [NSError errorWithDomain:@"Unable to process payment" code:LOGIN_FAILURE_OTHER userInfo:nil];
+                [self.slidePayCoreDelegate paymentFinishedWithResponse:nil withError:paymentError];
+            }
+            else {
+                NSError *error = nil;
+                NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+                [self.slidePayCoreDelegate paymentFinishedWithResponse:responseDictionary withError:nil];
+            }
+        }];
+
+    }
+}
+
+
 
 
 
@@ -278,9 +317,9 @@ static AudioCaptureRecorder *myRecorder;
 - (void)devConnStatusChange {
     BOOL isDeviceConnected = [mtSCRALib isDeviceConnected];
     if (isDeviceConnected)
-        [self.paymentDelegate magtekConnected:YES];
+        [self.slidePayCoreDelegate readerConnected:YES withType:DEVICE_MAGTEK_IDYNAMO];
     else
-        [self.paymentDelegate magtekConnected:NO];
+        [self.slidePayCoreDelegate readerConnected:NO withType:DEVICE_MAGTEK_IDYNAMO];
 }
 
 - (void)trackDataReady:(NSNotification *)notification
@@ -311,7 +350,7 @@ static AudioCaptureRecorder *myRecorder;
                         
                     }
                     else {
-                        [self.paymentDelegate swipeFailed];
+                        [self.slidePayCoreDelegate swipeFailed];
                     }
                 }
                 
@@ -329,11 +368,11 @@ static AudioCaptureRecorder *myRecorder;
             break;
         }
         case TRANS_STATUS_START: {
-            [self.paymentDelegate magtekProcessingStarted];
+            [self.slidePayCoreDelegate magtekProcessingStarted];
             break;
         }
         case TRANS_STATUS_ERROR:
-            [self.paymentDelegate swipeFailed];
+            [self.slidePayCoreDelegate swipeFailed];
             break;
             
         default:
@@ -390,7 +429,7 @@ static AudioCaptureRecorder *myRecorder;
     }
 }
 
-- (NSDictionary *) createCNPWithZip: (NSString *) zipCode withCVV: (NSString *) cvv withExpiryMonth: (NSString *) expiryMonth withExpiryYear: (NSString *) expiryYear withCardNumber: (NSString *) cardNumber
+- (void) createCNPWithZip: (NSString *) zipCode withCVV: (NSString *) cvv withExpiryMonth: (NSString *) expiryMonth withExpiryYear: (NSString *) expiryYear withCardNumber: (NSString *) cardNumber
 {
     
     [self checkIfLocationManagerIsOn];
@@ -419,7 +458,25 @@ static AudioCaptureRecorder *myRecorder;
     
     [typedInArgs addEntriesFromDictionary:addOnDictionary];
     
-    return typedInArgs;
+    [self sendPaymentDictionaryToBackend:typedInArgs];
+}
+
+//refundPayment
+- (void) refundPayment: (int) paymentID {
+    request.URL = [[SlidePayCore sharedInstance] urlByAppendingPath:[NSString stringWithFormat:@"payment/refund/%d", paymentID]];
+    request.HTTPMethod = @"POST";
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        if (error) {
+            [self.slidePayCoreDelegate refundFinishedWithResponse:nil withError:error];
+        }
+        else {
+            NSError *error = nil;
+            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            [self.slidePayCoreDelegate refundFinishedWithResponse:responseDictionary withError:nil];
+        }
+    }];
+    
 }
 
 
@@ -529,14 +586,4 @@ static AudioCaptureRecorder *myRecorder;
 
 @end
 
-@implementation SlidePayUserMaster
 
-@synthesize firstName,lastName,companyID,locationID,userMasterID;
-
-@end
-
-@implementation SlidePayLoginObject
-
-@synthesize companyName,locationName,slidePayUser,slidePayEndpoint,userPermissionLevel, slidePayToken;
-
-@end

@@ -7,37 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SlidePayCoreEnumerations.h"
+#import "SlidePayCoreHelper.h"
 
-@interface SlidePayUserMaster : NSObject
 
-@property (strong, nonatomic) NSNumber *userMasterID;
-@property (strong, nonatomic) NSNumber *companyID;
-@property (strong, nonatomic) NSNumber *locationID;
-@property (strong, nonatomic) NSNumber *firstName;
-@property (strong, nonatomic) NSNumber *lastName;
-
-@end
-
-/*
- SlidePayLoginObject -
- */
-@interface SlidePayLoginObject : NSObject
-
-@property (retain, nonatomic) NSString *slidePayToken;
-@property (retain, nonatomic) NSString *slidePayEndpoint;
-@property (retain, nonatomic) SlidePayUserMaster *slidePayUser;
-@property (retain, nonatomic) NSString *companyName;
-@property (retain, nonatomic) NSString *locationName;
-@property USER_PERMISSION_LEVEL userPermissionLevel;
-
-@end
-
-@protocol SlidePayCoreDelegate <NSObject>
-
-- (void) loginRequestCompletedWithData: (SlidePayLoginObject *) loginObject withError: (NSError *) error;
-
-@end
 
 /*
  slidePayPaymentDelegate
@@ -46,22 +18,27 @@
  
  Example:
  
-- (void) paymentDictionaryCreated: (NSDictionary *) simplePaymentDictionary {
+ - (void) paymentDictionaryCreated: (NSDictionary *) simplePaymentDictionary {
  NSString *jsonRepresentationOfSimplePayment = [CubeSimplePayment convertIDToJSONString:simplePaymentDictionary]
  }
  
  On a failed swipe, the delegate will call swipeFailed.
  */
 
-@protocol slidePayPaymentDelegate <NSObject>
 
-- (void) paymentDictionaryCreated: (NSDictionary *) simplePaymentDictionary;
+@protocol SlidePayCoreDelegate <NSObject>
+
+- (void) loginRequestCompletedWithData: (SlidePayLoginObject *) loginObject withError: (NSError *) error;
+- (void) paymentFinishedWithResponse: (NSDictionary *) responseDictionary withError: (NSError *) error;
+- (void) refundFinishedWithResponse: (NSDictionary *) responseDictionary withError: (NSError *) error;
 - (void) swipeFailed;
-- (void) magtekConnected: (BOOL) on;
-- (void) ramblerConnected: (BOOL) on;
+- (void) readerConnected: (BOOL) flag withType: (DEVICE_TYPE) type;
+- (void) readerProcessingStarted: (DEVICE_TYPE) type;
 - (void) magtekProcessingStarted;
 
 @end
+
+
 
 
 
@@ -72,7 +49,7 @@
 - (void) loginWithEmail: (NSString *) emailAddress withPassword: (NSString *) password;
 
 @property (weak, nonatomic) id <SlidePayCoreDelegate> slidePayCoreDelegate;
-
+@property SlidePayUserMaster *userMaster;
 
 
 /*
@@ -83,26 +60,25 @@
  This is the amount that you will charge the user this.  You will need to set this amount before the user swipes, as the dictionary is formed with the amount from cube_amount_to_charge.
  */
 @property double amountToCharge;
-@property SlidePayUserMaster *userMaster;
-@property (weak, nonatomic) id <slidePayPaymentDelegate> paymentDelegate;
+
 
 
 /*
  If you want to turn off audio swipe detection for Rambler, use the method turnOnAudioSwipeDetection.
  
  To turn off audio swiping:
- [[CubeSimplePayment sharedInstance] turnOnAudioSwipeDetection:NO];
+ [[SlidePayCore sharedInstance] turnOnAudioSwipeDetection:NO];
  
  To turn on audio swiping (when you initialize the sharedInstance, audio swiping is turned ON by default:
- [[CubeSimplePayment sharedInstance] turnOnAudioSwipeDetection:YES];
+ [[SlidePayCore sharedInstance] turnOnAudioSwipeDetection:YES];
  */
 - (void) turnOnAudioSwipeDetection: (BOOL) flag;
 
 /*
  createTypedInCardArgumentsWithZip will require five fields (zip code, cvv, expiry month, expiry year, and the credit card number).  This is for keyed in transactions, and we will create an object from there and send it back to you through the paymentDictionaryCreated object.
  */
-- (NSDictionary *) createCNPWithZip: (NSString *) zipCode withCVV: (NSString *) cvv withExpiryMonth: (NSString *) expiryMonth withExpiryYear: (NSString *) expiryYear withCardNumber: (NSString *) cardNumber;
-
+- (void) createCNPWithZip: (NSString *) zipCode withCVV: (NSString *) cvv withExpiryMonth: (NSString *) expiryMonth withExpiryYear: (NSString *) expiryYear withCardNumber: (NSString *) cardNumber;
+- (void) refundPayment: (int) paymentID;
 
 /*
  Helper Methods
@@ -116,6 +92,7 @@
  */
 
 + (CC_CARD_TYPE) obtainCardTypeFromCardNumber: (NSString*) cardNumber;
+
 @end
 
 
