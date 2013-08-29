@@ -26,7 +26,8 @@
 		0EB81F1417B475BD00F5F65A /* libMTSCRA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB81F0C17B475BD00F5F65A /* libMTSCRA.a */; };
 		0EB81F1517B475BD00F5F65A /* AudioReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0EB81F0E17B475BD00F5F65A /* AudioReader.cpp */; };
 		0EB81F1617B475BD00F5F65A /* libReaderAPI-1.3.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB81F1117B475BD00F5F65A /* libReaderAPI-1.3.1.a */; };
-		0EB81F1717B47AD400F5F65A /* SlidePayCoreEnumerations.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0EB81EFE17B46EE400F5F65A /* SlidePayCoreEnumerations.h */; };
+		0EE9BC9417B9FE9B00285ABA /* SlidePayCoreHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE9BC9317B9FE9B00285ABA /* SlidePayCoreHelper.m */; };
+		0EE9BC9517BA98E900285ABA /* SlidePayCoreHelper.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0EE9BC9217B9FE9B00285ABA /* SlidePayCoreHelper.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +47,7 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
-				0EB81F1717B47AD400F5F65A /* SlidePayCoreEnumerations.h in CopyFiles */,
+				0EE9BC9517BA98E900285ABA /* SlidePayCoreHelper.h in CopyFiles */,
 				0E8ECE1617B2C7DD000EFE1C /* SlidePayCore.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -66,7 +67,6 @@
 		0E8ECE2B17B2C7DD000EFE1C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0E8ECE2D17B2C7DD000EFE1C /* SlidePayCoreTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SlidePayCoreTests.h; sourceTree = "<group>"; };
 		0E8ECE2E17B2C7DD000EFE1C /* SlidePayCoreTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SlidePayCoreTests.m; sourceTree = "<group>"; };
-		0EB81EFE17B46EE400F5F65A /* SlidePayCoreEnumerations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SlidePayCoreEnumerations.h; sourceTree = "<group>"; };
 		0EB81EFF17B4750A00F5F65A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		0EB81F0117B4751100F5F65A /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		0EB81F0317B4751A00F5F65A /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
@@ -81,6 +81,8 @@
 		0EB81F1017B475BD00F5F65A /* MTSCRA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSCRA.h; sourceTree = "<group>"; };
 		0EB81F1117B475BD00F5F65A /* libReaderAPI-1.3.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libReaderAPI-1.3.1.a"; sourceTree = "<group>"; };
 		0EB81F1217B475BD00F5F65A /* ReaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderController.h; sourceTree = "<group>"; };
+		0EE9BC9217B9FE9B00285ABA /* SlidePayCoreHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidePayCoreHelper.h; sourceTree = "<group>"; };
+		0EE9BC9317B9FE9B00285ABA /* SlidePayCoreHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlidePayCoreHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,7 +165,8 @@
 				0E8ECE1517B2C7DD000EFE1C /* SlidePayCore.h */,
 				0E8ECE1717B2C7DD000EFE1C /* SlidePayCore.m */,
 				0E8ECE1317B2C7DD000EFE1C /* Supporting Files */,
-				0EB81EFE17B46EE400F5F65A /* SlidePayCoreEnumerations.h */,
+				0EE9BC9217B9FE9B00285ABA /* SlidePayCoreHelper.h */,
+				0EE9BC9317B9FE9B00285ABA /* SlidePayCoreHelper.m */,
 			);
 			path = SlidePayCore;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				0E8ECE1817B2C7DD000EFE1C /* SlidePayCore.m in Sources */,
 				0EB81F1317B475BD00F5F65A /* AudioCaptureRecorder.m in Sources */,
 				0EB81F1517B475BD00F5F65A /* AudioReader.cpp in Sources */,
+				0EE9BC9417B9FE9B00285ABA /* SlidePayCoreHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

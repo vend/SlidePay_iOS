@@ -167,10 +167,10 @@ static AudioCaptureRecorder *_shared_model;
 }
 
 - (void)onDecodingStart {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"audio_decoding_start" object:nil];
 }
 
 - (void)onCardSwipeDetected {
-
 
 }
 
