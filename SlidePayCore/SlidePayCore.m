@@ -38,7 +38,7 @@ static AudioCaptureRecorder *myRecorder;
         [_shared_model setUpMagTekSwiper];
         [mtSCRALib openDevice];
     }
-    
+
     return _shared_model;
 }
 
@@ -79,7 +79,7 @@ static AudioCaptureRecorder *myRecorder;
             myEmailAddress = emailAddress;
             [self processSupervisorData:data];
         }
-            }];
+    }];
     
 }
 
@@ -214,10 +214,8 @@ static AudioCaptureRecorder *myRecorder;
     return [NSURL URLWithString:path relativeToURL:[NSURL URLWithString:myEndpointString]];
 }
 
-#pragma mark - Payment Section
-/*
- Payment Section
- */
+
+#pragma mark - Rambler
 - (void) setUpRambler {
     myRecorder = [AudioCaptureRecorder sharedInstance];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(obtainedRamblerSwipe:) name:@"rambler_swipe" object:nil];
@@ -251,6 +249,26 @@ static AudioCaptureRecorder *myRecorder;
     [self.slidePayCoreDelegate swipeFailed];
 }
 
+#pragma mark - Payment Section
+
+//refundPayment
+- (void) refundPayment: (int) paymentID {
+    NSMutableURLRequest *refundURLRequest = [self prepareURLRequest:[NSMutableURLRequest requestWithURL:[[SlidePayCore sharedInstance] urlByAppendingPath:[NSString stringWithFormat:@"payment/refund/%d", paymentID]]]];
+    refundURLRequest.HTTPMethod = @"POST";
+    
+    [NSURLConnection sendAsynchronousRequest:refundURLRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        if (error) {
+            [self.slidePayCoreDelegate refundFinishedWithResponse:nil withError:error];
+        }
+        else {
+            NSError *error = nil;
+            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            [self.slidePayCoreDelegate refundFinishedWithResponse:responseDictionary withError:nil];
+        }
+    }];
+    
+}
+
 - (void) createPaymentDictionaryFromEncryptedSwipe: (NSMutableDictionary *) my_encrypted_dictionary {
     NSDictionary *my_add_on_dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                           [NSNumber numberWithDouble:amountToCharge], @"amount",
@@ -262,11 +280,52 @@ static AudioCaptureRecorder *myRecorder;
                                           , nil];
     
     [my_encrypted_dictionary addEntriesFromDictionary:my_add_on_dictionary];
-    
-    [self sendPaymentDictionaryToBackend:my_encrypted_dictionary];
+    [self conditionalMakePayment:my_encrypted_dictionary];
 }
 
-- (void) sendPaymentDictionaryToBackend: (NSDictionary *) paymentDictionary {
+- (void) createCNPWithZip: (NSString *) zipCode withCVV: (NSString *) cvv withExpiryMonth: (NSString *) expiryMonth withExpiryYear: (NSString *) expiryYear withCardNumber: (NSString *) cardNumber
+{
+    
+    [self checkIfLocationManagerIsOn];
+    
+    
+    NSString *ccType = [SlidePayCore obtainCardStringFromCardType: [SlidePayCore obtainCardTypeFromCardNumber: cardNumber]];
+    NSMutableDictionary *typedInArgs = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                        zipCode, @"cc_billing_zip",
+                                        cvv, @"cc_cvv2",
+                                        expiryMonth, @"cc_expiry_month",
+                                        expiryYear, @"cc_expiry_year",
+                                        cardNumber, @"cc_number",
+                                        [NSNumber numberWithInt:0], @"cc_present",
+                                        ccType, @"cc_type", nil];
+    
+    NSDictionary *addOnDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                     [NSNumber numberWithDouble:self.amountToCharge], @"amount",
+                                     userMaster.companyID, @"company_id",
+                                     userMaster.locationID, @"location_id",
+                                     @"CreditCard", @"method",
+                                     userMaster.firstName, @"first_name",
+                                     userMaster.lastName, @"last_name",
+                                     [NSNumber numberWithDouble:myRecorder.myLocationManager.location.coordinate.latitude], @"latitude",
+                                     [NSNumber numberWithDouble:myRecorder.myLocationManager.location.coordinate.longitude], @"longitude"
+                                     , nil];
+    
+    [typedInArgs addEntriesFromDictionary:addOnDictionary];
+    [self conditionalMakePayment:typedInArgs];
+}
+
+-(void) conditionalMakePayment:(NSDictionary*)paymentDictionary{
+    if(![self.slidePayCoreDelegate respondsToSelector:@selector(didCreatePaymentDictionary:)]){
+        [self makePayment:paymentDictionary];
+    }else{
+        BOOL shouldMakePayment = [self.slidePayCoreDelegate didCreatePaymentDictionary:[paymentDictionary mutableCopy]];
+        if(shouldMakePayment){
+            [self makePayment:paymentDictionary];
+        }
+    }
+}
+
+- (void) makePayment:(NSDictionary *)paymentDictionary{
     
     if (![paymentDictionary objectForKey:@"latitude"] || ![paymentDictionary objectForKey:@"longitude"]) {
         NSError *error = [NSError errorWithDomain:@"No location data.  Please turn on location services" code:PAYMENT_FAILURE_NO_LOCATION userInfo:nil];
@@ -295,9 +354,7 @@ static AudioCaptureRecorder *myRecorder;
     }
 }
 
-
-
-
+#pragma mark - MagTek
 
 - (void) setUpMagTekSwiper {
     mtSCRALib = [[MTSCRA alloc] init];
@@ -432,55 +489,6 @@ static AudioCaptureRecorder *myRecorder;
     }
 }
 
-- (void) createCNPWithZip: (NSString *) zipCode withCVV: (NSString *) cvv withExpiryMonth: (NSString *) expiryMonth withExpiryYear: (NSString *) expiryYear withCardNumber: (NSString *) cardNumber
-{
-    
-    [self checkIfLocationManagerIsOn];
-    
-    
-    NSString *ccType = [SlidePayCore obtainCardStringFromCardType: [SlidePayCore obtainCardTypeFromCardNumber: cardNumber]];
-    NSMutableDictionary *typedInArgs = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                             zipCode, @"cc_billing_zip",
-                                             cvv, @"cc_cvv2",
-                                             expiryMonth, @"cc_expiry_month",
-                                             expiryYear, @"cc_expiry_year",
-                                             cardNumber, @"cc_number",
-                                             [NSNumber numberWithInt:0], @"cc_present",
-                                             ccType, @"cc_type", nil];
-    
-    NSDictionary *addOnDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                          [NSNumber numberWithDouble:self.amountToCharge], @"amount",
-                                          userMaster.companyID, @"company_id",
-                                          userMaster.locationID, @"location_id",
-                                          @"CreditCard", @"method",
-                                          userMaster.firstName, @"first_name",
-                                          userMaster.lastName, @"last_name",
-                                          [NSNumber numberWithDouble:myRecorder.myLocationManager.location.coordinate.latitude], @"latitude",
-                                          [NSNumber numberWithDouble:myRecorder.myLocationManager.location.coordinate.longitude], @"longitude"
-                                          , nil];
-    
-    [typedInArgs addEntriesFromDictionary:addOnDictionary];
-    
-    [self sendPaymentDictionaryToBackend:typedInArgs];
-}
-
-//refundPayment
-- (void) refundPayment: (int) paymentID {
-    NSMutableURLRequest *refundURLRequest = [self prepareURLRequest:[NSMutableURLRequest requestWithURL:[[SlidePayCore sharedInstance] urlByAppendingPath:[NSString stringWithFormat:@"payment/refund/%d", paymentID]]]];
-    refundURLRequest.HTTPMethod = @"POST";
-    
-    [NSURLConnection sendAsynchronousRequest:refundURLRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-        if (error) {
-            [self.slidePayCoreDelegate refundFinishedWithResponse:nil withError:error];
-        }
-        else {
-            NSError *error = nil;
-            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
-            [self.slidePayCoreDelegate refundFinishedWithResponse:responseDictionary withError:nil];
-        }
-    }];
-    
-}
 
 - (NSMutableURLRequest *) prepareURLRequest: (NSMutableURLRequest *) urlRequest {
     [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -489,6 +497,8 @@ static AudioCaptureRecorder *myRecorder;
     return urlRequest;
 }
 
+
+#pragma mark - CC Utility Functions
 
 + (NSString *) obtainCardTypeFromRedacted: (NSString *) cardIIN {
     

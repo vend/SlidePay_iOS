@@ -10,4 +10,5 @@
 
 @interface SlidePayCoreTests : SenTestCase
 
+
 @end
