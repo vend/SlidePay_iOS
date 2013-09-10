@@ -31,12 +31,15 @@
 
 @optional
 - (void) loginRequestCompletedWithData: (SlidePayLoginObject *) loginObject withError: (NSError *) error;
-- (BOOL) didCreatePaymentDictionary:(NSMutableDictionary*)paymentDictionary; //if you return TRUE, or don't implement the method, then, upon return, the payment will be submitted automatically
 - (void) paymentFinishedWithResponse: (NSDictionary *) responseDictionary withError: (NSError *) error;
 - (void) refundFinishedWithResponse: (NSDictionary *) responseDictionary withError: (NSError *) error;
 - (void) swipeFailed;
 - (void) readerConnected: (BOOL) flag withType: (DEVICE_TYPE) type;
 - (void) readerProcessingStarted: (DEVICE_TYPE) type;
+
+@optional
+- (BOOL) didCreatePaymentDictionary:(NSMutableDictionary*)paymentDictionary; //if you return TRUE, or don't implement the method, then, upon return, the payment will be submitted automatically
+
 
 @end
 
