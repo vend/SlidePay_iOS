@@ -25,15 +25,21 @@
  On a failed swipe, the delegate will call swipeFailed.
  */
 
+@class SlidePayCore;
 
 @protocol SlidePayCoreDelegate <NSObject>
 
+@optional
 - (void) loginRequestCompletedWithData: (SlidePayLoginObject *) loginObject withError: (NSError *) error;
 - (void) paymentFinishedWithResponse: (NSDictionary *) responseDictionary withError: (NSError *) error;
 - (void) refundFinishedWithResponse: (NSDictionary *) responseDictionary withError: (NSError *) error;
 - (void) swipeFailed;
 - (void) readerConnected: (BOOL) flag withType: (DEVICE_TYPE) type;
 - (void) readerProcessingStarted: (DEVICE_TYPE) type;
+
+@optional
+- (BOOL) didCreatePaymentDictionary:(NSMutableDictionary*)paymentDictionary; //if you return TRUE, or don't implement the method, then, upon return, the payment will be submitted automatically
+
 
 @end
 
@@ -56,11 +62,10 @@
  */
 
 /*
- This is the amount that you will charge the user this.  You will need to set this amount before the user swipes, as the dictionary is formed with the amount from cube_amount_to_charge.
+ This is the amount that you will charge the user.  You will need to set this amount before the user swipes, as the dictionary is formed with the amount from cube_amount_to_charge.
  */
 @property double amountToCharge;
-
-
+-(void) makePayment:(NSDictionary*)paymentDictionary; //when you implement -didCreatePaymentDictionary: and return FALSE, then you'll need to call this with your (potentially modified) paymentDictionary. If you call this with the dictionary from -didCreatePaymentDictionary: after returning TRUE, then you will MAKE A DUPLICATE PAYMENT.
 
 /*
  If you want to turn off audio swipe detection for Rambler, use the method turnOnAudioSwipeDetection.
