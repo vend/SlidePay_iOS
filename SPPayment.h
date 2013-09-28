@@ -129,7 +129,7 @@ typedef void(^GetPaymentSuccess)(SPPayment*);
 /**
  *  Validates the payment object. Not implemented.
  *
- *  @return a bit field whose 1 values correspond to class fields with a format error. Unless this function returns 0, submitting your payment will fail.
+ *  @return
  */
 //-(NSInteger) validate;
 
@@ -139,9 +139,6 @@ typedef void(^GetPaymentSuccess)(SPPayment*);
 @property NSString * latitude;
 @property NSString * longitude;
 @property (readonly) NSNumber * paymentID;
-/**
- * On the backend, a refund and a 'payment' share the same structure. If receiever corresponds to refund 'payment', then this is true.
- */
-@property (readonly) bool isRefund;
+
 
 @end

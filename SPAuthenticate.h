@@ -23,10 +23,14 @@ typedef void(^PermissionsSuccessBlock)();
 
 @property (nonatomic) NSString *username;
 @property (nonatomic) NSString *password;
-//@property (nonatomic) NSString *token;
 
-
+/**
+ *  Logs you in.
+ *
+ *  @param success A block called when the login operation has completed successfully
+ *  @param failure A block called when the login operation has failed to complete successfully
+ */
 -(void) login:(LoginSuccessBlock)success failure:(ResourceFailureBlock)failure;
--(void) getPermissions:(PermissionsSuccessBlock)success failure:(ResourceFailureBlock)failure;
+//-(void) getPermissions:(PermissionsSuccessBlock)success failure:(ResourceFailureBlock)failure; coming soon
 
 @end
