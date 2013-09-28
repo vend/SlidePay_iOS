@@ -63,5 +63,5 @@ Copyright (c) 2013 SlidePay
 
 ##Contact
 
-Please contact api@slidepay.com for any questions.
+Please contact api@slidepay.com with any questions.
 
