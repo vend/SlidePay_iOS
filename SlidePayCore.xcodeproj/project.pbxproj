@@ -6,6 +6,19 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		FAD014F617F6DA3F00758187 /* Documentation */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = FAD014F917F6DA3F00758187 /* Build configuration list for PBXAggregateTarget "Documentation" */;
+			buildPhases = (
+			);
+			dependencies = (
+			);
+			name = Documentation;
+			productName = Documentation;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		0E8ECE1117B2C7DD000EFE1C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E8ECE1017B2C7DD000EFE1C /* Foundation.framework */; };
 		0E8ECE2017B2C7DD000EFE1C /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E8ECE1F17B2C7DD000EFE1C /* SenTestingKit.framework */; };
@@ -253,6 +266,7 @@
 			targets = (
 				0E8ECE0C17B2C7DD000EFE1C /* SlidePayCore */,
 				0E8ECE1D17B2C7DD000EFE1C /* SlidePayCoreTests */,
+				FAD014F617F6DA3F00758187 /* Documentation */,
 			);
 		};
 /* End PBXProject section */
@@ -476,6 +490,20 @@
 			};
 			name = Release;
 		};
+		FAD014F717F6DA3F00758187 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		FAD014F817F6DA3F00758187 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -505,6 +533,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		FAD014F917F6DA3F00758187 /* Build configuration list for PBXAggregateTarget "Documentation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FAD014F717F6DA3F00758187 /* Debug */,
+				FAD014F817F6DA3F00758187 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

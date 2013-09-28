@@ -29,43 +29,33 @@ typedef void(^RefundSuccess)(NSInteger paymentID);
 @class SPPayment;
 typedef void(^GetPaymentSuccess)(SPPayment*);
 
-/**
+/** This class governs the creation of objects that encapsulate a payment, performing a transaction using that payment, and refunding a payment. Authentication is required to use any method which creates, refunds, or retieves a payment.
  
- Overview - this class governs the creation of objects that encapsulate a payment, performing a transaction using that payment, and refunding a payment. Authentication is required to use any method which creates, refunds, or retieves a payment.
+ Card not present payments are initialized through initWithCardNumber:zipCode:cvv:expMonth:expYear:
  
- Creating a payment - Card not present payments are initialized through -initWithCardNumber:zip:cvv:expMonth:expYear:
-                    - Card present payments are initialized through -initWithPaymentDictionary:
-                    @see -initWithCardNumber:zip:cvv:expMonth:expYear:
-                    @see -initWithPaymentDictionary:
+ Card present payments are initialized through initWithPaymentDictionary:
 
- Making a payment - Once a payment has been initialized through one of the two initialization methods, set the amount property, and call -payWithSuccessHandler:failure:
-                  @see -payWithSuccessHandler:failure:
-                  @see -amount
+ To pay, initialize the payment, set the amount property, and call payWithSuccessHandler:failure:
  
- Refunding a payment - If you don't have access to the payment object you'd like to refund, +refundPaymentWithID:success:failure: will refund the payment corrponding to the specified payment id. Otherwise, -refundWithSuccess:failure: will perform a refund on the receiver.
-                        @see +refundPaymentWithID:success:failure:
-                        @see -refundWithSuccess:failure:
- 
- Retrieving a payment - call -getPaymentWithID: with a newly allocated Payment object. @see -getPaymentWithID:
- 
- Retrieving many payments - call +getPaymentsSince: to rerieve all payments since the specified date. @see +getPaymentsSince:
+ If you don't have access to the payment object you'd like to refund, refundPaymentWithID:success:failure: will refund the payment corrponding to the specified payment id. Otherwise, -refundWithSuccess:failure: will perform a refund on the receiver.
+
+ A payment can be retrieved by calling getPaymentWithID:success:failure:
  
  */
 @interface SPPayment : SPRemoteResource
 
-/**
- *  Creates, but does not process, a card present transaction.
- *
- *  @param paymentDict The dictionary containing the key/value pairs created from a credit card swipe. The two hardware libraries, magtek and rambler, both provide NSDictionary output in the appropriate format. The format is as follows: 
- Key:"vendor"    Value:"magensa" or "magtek"
- Key:"ksn"       Value:<device ksn>
- Key:"trackdata" Value:<encrypted track data: -getResponseData if using magensa, -getTrack2 otherwise>
- Key:"serial"    Value:<device serial number>
- *
- *
- *  @return An initialized card present payment transaction. The payment is only processed when -payWithSuccessHandler:failure: is called.
+/** Creates, but does not process, a card present transaction.
  
- *  @see payWithSuccessHandler:failure:
+   @param paymentDict The dictionary containing the key/value pairs created from a credit card swipe. The two hardware libraries, magtek and rambler, both provide NSDictionary output in the appropriate format. The format is as follows:
+ 
+        @{@"ksn":<device ksn>,
+          @"vendor":@"magensa" OR @"magtek"
+          @"serial":<device serial>
+          @"trackdata":<if using magensa, getResponseData; otherwise, getTrack2>
+        };
+ 
+   @return An initialized card present payment transaction. The payment is only processed when payWithSuccessHandler:failure: is called.
+ 
  */
 -(id) initWithPaymentDictionary:(NSDictionary*)paymentDict;
 
@@ -76,9 +66,9 @@ typedef void(^GetPaymentSuccess)(SPPayment*);
  *  @param zipCode    the zip code associated with the credit card being charged.
  *  @param cvv        the card cvv
  *  @param month      the expiration month in two digit format (January would be passed as @"01")
- *  @param year       the expiration year  in two digiti format (2016 would be passed as @"16")
+ *  @param year       the expiration year  in two digit format (2016 would be passed as @"16")
  *
- *  @return An initialized card not present payment transaction. The payment is only processed when -payWithSuccessHandler:failure: is called.
+ *  @return An initialized card not present payment transaction. The payment is only processed when payWithSuccessHandler:failure: is called.
  *  
  *  @see payWithSuccessHandler:failure:
  */
@@ -119,23 +109,10 @@ typedef void(^GetPaymentSuccess)(SPPayment*);
  *  Populates the receiver with the remote data corresponding to paymentID parameter
  *
  *  @param paymentID a payment identifier corresponding to the payment you'd like to retrieve
- *  @see initWithPaymentID:
+ *  @param success   Called when the operation completes successfully.
+ *  @param failure   Called if the the operation fails.
  */
 -(void) getPaymentWithID:(NSInteger)paymentID success:(GetPaymentSuccess)success failure:(ResourceFailureBlock)failure;
-
-/**
- *  Returns all payments (as an array of SPPayment objects) that have been created or changed since the supplied date.
- *
- *  @param date Retrieve all payments created/changed since this date.
- */
-//+(void) getPaymentsSince:(NSDate*)date;
-
-/**
- *  Validates the payment object. Not implemented.
- *
- *  @return
- */
-//-(NSInteger) validate;
 
 
 @property NSNumber * amount;
