@@ -1,4 +1,4 @@
-mobile-slidepay-core
+SlidePay iOS
 =====================
 
 ## About
