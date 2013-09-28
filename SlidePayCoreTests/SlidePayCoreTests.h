@@ -10,6 +10,7 @@
 
 @interface SlidePayCoreTests : SenTestCase{
     BOOL done;
+    NSInteger lastPaymentID;
 }
 
 
