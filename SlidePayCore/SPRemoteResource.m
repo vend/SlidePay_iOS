@@ -65,18 +65,21 @@ static RKObjectManager *sharedManager;
         NSLog(@"        *** token: %@",token);
         NSLog(@"        *** endpoint: %@",realEndpoint);
         NSLog(@"        *** %@ response: %@",@"SP_RemoteResource",response);
+    }else{
+        [sharedManager.HTTPClient setDefaultHeader:@"x-cube-token" value:token];
     }
     
 }
 
 +(RKObjectManager*) sharedManager{
     
-    if(token && realEndpoint && !sharedManager){
+    if(realEndpoint && !sharedManager){
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
             sharedManager = [RKObjectManager managerWithBaseURL:[NSURL URLWithString:realEndpoint]];
             [sharedManager.HTTPClient setDefaultHeader:@"Content-Type" value:@"application/json"];
             [sharedManager.HTTPClient setDefaultHeader:@"x-cube-encoding" value:@"application/json"];
+            [sharedManager.HTTPClient setDefaultHeader:@"x-cube-token" value:token];
             sharedManager.requestSerializationMIMEType = RKMIMETypeJSON;
         });
     }

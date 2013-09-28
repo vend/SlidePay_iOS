@@ -359,6 +359,7 @@ static NSMutableDictionary *RKRegisteredResponseMapperOperationDataSourceClasses
 
 - (RKMappingResult *)performMappingWithObject:(id)sourceObject error:(NSError **)error
 {
+    
     Class dataSourceClass = [RKRegisteredResponseMapperOperationDataSourceClasses objectForKey:[self class]] ?: [RKObjectMappingOperationDataSource class];
     id<RKMappingOperationDataSource> dataSource = [dataSourceClass new];
     self.mapperOperation = [[RKMapperOperation alloc] initWithRepresentation:sourceObject mappingsDictionary:self.responseMappingsDictionary];

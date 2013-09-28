@@ -21,7 +21,13 @@ typedef void(^PaymentSuccessBlock)(NSInteger paymentID,NSInteger orderID,NSData*
  *  @param paymentID The payment id for the payment that was refunded.
  *  @param refundID  The unique identifier for the refund.
  */
-typedef void(^RefundSuccess)(NSInteger paymentID, NSInteger refundID);
+typedef void(^RefundSuccess)(NSInteger paymentID);
+
+/**
+ *  A payment has been successfully retrieved from the backend.
+ */
+@class SPPayment;
+typedef void(^GetPaymentSuccess)(SPPayment*);
 
 /**
  
@@ -74,7 +80,6 @@ typedef void(^RefundSuccess)(NSInteger paymentID, NSInteger refundID);
  */
 -(id) initWithCardNumber:(NSString*)cardNumber zipCode:(NSString*)zipCode cvv:(NSString*)cvv expMonth:(NSString*)month expYear:(NSString*)year;
 
-
 /**
  *  Completes the payment by sending it to the SlidePay backend.
  *
@@ -107,33 +112,33 @@ typedef void(^RefundSuccess)(NSInteger paymentID, NSInteger refundID);
 
 
 /**
- *  Populates the receiver using the data receieved by requesting
+ *  Populates the receiver with the remote data corresponding to paymentID parameter
  *
  *  @param paymentID a payment identifier corresponding to the payment you'd like to retrieve
+ *  @see initWithPaymentID:
  */
--(void) getPaymentWithID:(NSInteger)paymentID;
+-(void) getPaymentWithID:(NSInteger)paymentID success:(GetPaymentSuccess)success failure:(ResourceFailureBlock)failure;
 
 /**
  *  Returns all payments (as an array of SPPayment objects) that have been created or changed since the supplied date.
  *
  *  @param date Retrieve all payments created/changed since this date.
  */
-+(void) getPaymentsSince:(NSDate*)date;
+//+(void) getPaymentsSince:(NSDate*)date;
 
 /**
  *  Validates the payment object. Not implemented.
  *
  *  @return a bit field whose 1 values correspond to class fields with a format error. Unless this function returns 0, submitting your payment will fail.
  */
--(NSInteger) validate;
+//-(NSInteger) validate;
 
 
 @property NSNumber * amount;
 @property NSString * notes;
-@property NSString *latitude;
-@property NSString *longitude;
+@property NSString * latitude;
+@property NSString * longitude;
 @property (readonly) NSNumber * paymentID;
-@property (readonly) bool isCardPresentTransaction;
 /**
  * On the backend, a refund and a 'payment' share the same structure. If receiever corresponds to refund 'payment', then this is true.
  */

@@ -7,6 +7,7 @@
 //
 
 #import "SPPayment.h"
+#import <objc/runtime.h>
 
 
 @interface SPPayment ()
@@ -33,6 +34,12 @@
 @property (nonatomic) NSString * created;
 @property (nonatomic) NSString * last_update;
 @property (nonatomic) NSString * is_refund;
+@property (nonatomic) NSString * transaction_state;
+@property (nonatomic) NSString * status_code;
+@property (nonatomic) NSString * status_message;
+@property (nonatomic) NSNumber * is_approved;
+
+@property (nonatomic) RKObjectMapping *getMapping;
 
 @end
 
@@ -41,9 +48,8 @@
 @synthesize resource = _resource;
 
 #pragma mark creating a payment
--(id) initWithPaymentID:(NSInteger)paymentID{
+-(id) init{
     if(self = [super init]){
-        _paymentID = [NSNumber numberWithInteger:paymentID];
         [self.objectManager addResponseDescriptor:[self getPaymentResponseDescriptor]];
     }
     return self;
@@ -67,6 +73,7 @@
         RKRequestDescriptor *descriptor = [self requestDescriptorWithKeys:[additionalKeys arrayByAddingObjectsFromArray:[self swipedRequestKeys]]];
         [self.objectManager addRequestDescriptor:descriptor];
         [self.objectManager addResponseDescriptor:[self makePaymentResponseDescriptor]];
+        [self.objectManager addResponseDescriptor:[self getPaymentResponseDescriptor]];
     }
     return self;
 }
@@ -81,6 +88,7 @@
         self.method = @"CreditCard";
         [self.objectManager addRequestDescriptor:[self keyedPaymentRequestDescriptor]];
         [self.objectManager addResponseDescriptor:[self makePaymentResponseDescriptor]];
+        [self.objectManager addResponseDescriptor:[self getPaymentResponseDescriptor]];
     }
     return self;
 }
@@ -109,21 +117,26 @@
                                                     @"encryption_vendor",
                                                     @"created",
                                                     @"last_update",
-                                                    @"payment_id",
                                                     @"is_refund",
                                                     @"cc_redacted_number",
-                                                    @"notes"
+                                                    @"notes",
+                                                    @"transaction_state",
+                                                    @"status_code",
+                                                    @"status_message",
+                                                    @"is_approved"
                                                     ]];
+    [paymentMapping addAttributeMappingsFromDictionary:@{@"payment_id":@"paymentID"}];
     
-    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:paymentMapping method:RKRequestMethodGET pathPattern:@"payment" keyPath:@"data" statusCodes:[SPPayment successCodes]];
+    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:paymentMapping method:RKRequestMethodGET pathPattern:@"payment/:payment_id" keyPath:@"data" statusCodes:[SPPayment successCodes]];
+    self.getMapping = paymentMapping;
     return responseDescriptor;
 }
 -(RKResponseDescriptor*)makePaymentResponseDescriptor{
     RKObjectMapping *paymentMapping = [RKObjectMapping mappingForClass:[SPPayment class]];
     [paymentMapping addAttributeMappingsFromDictionary:@{
                                                          @"payment_id":@"paymentID",
-                                                         @"order_master_id":@"order_master_id"
                                                          }];
+    [paymentMapping addAttributeMappingsFromArray:@[@"order_master_id",@"transaction_state",@"status_code",@"status_message",@"is_approved"]];
     RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:paymentMapping method:RKRequestMethodPOST pathPattern:@"payment/simple" keyPath:@"data" statusCodes:[SPPayment successCodes]];
     return responseDescriptor;
 }
@@ -175,9 +188,12 @@
                               path:@"payment/simple"
                         parameters:nil
                            success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-                               NSLog(@"success");
-                               NSData *responseData = operation.HTTPRequestOperation.responseData;
-                               success(self.paymentID.integerValue,self.order_master_id.integerValue,responseData);
+                               if([self.status_message isEqualToString:@"Declined"] || self.is_approved.integerValue == 0){
+                                   failure(self.status_code.integerValue,self.status_message,nil);
+                               }else{
+                                   NSData *responseData = operation.HTTPRequestOperation.responseData;
+                                   success(self.paymentID.integerValue,self.order_master_id.integerValue,responseData);
+                               }
                            }
                            failure:^(RKObjectRequestOperation *operation, NSError *error) {
                                NSNumber *errorCode;
@@ -208,12 +224,75 @@
     [client postPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         BOOL goodToGo = [SPRemoteResource checkResponseObjectForSuccessFlag:responseObject failure:failure];
         if(goodToGo){
-            [SPRemoteResource configureWithResponse:responseObject];
-            NSDictionary * data = [responseObject valueForKey:@"data"];
+            NSLog(@"refund response object: %@",responseObject);
+            NSDictionary * data = [responseObject valueForKey:@"data"] == [NSNull null] ? nil : [responseObject valueForKey:@"data"];
+            NSString * paymentID = [data valueForKey:@"payment_id"] == [NSNull null] ? nil : [data valueForKey:@"payment_id"];
+            success(paymentID.integerValue);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+        NSNumber *errorCode;
+        NSString *errorMessage;
+        [SPRemoteResource responseSanityCheck:[SPRemoteResource responseFromOperation:operation] errorCode:&errorCode errorMessage:&errorMessage];
+        failure(errorCode ? errorCode.integerValue : 0,errorMessage,error);
     }];
+    
 }
+
+#pragma mark getting a payment
+-(void) getPaymentWithID:(NSInteger)paymentID success:(GetPaymentSuccess)success failure:(ResourceFailureBlock)failure{
+    
+    NSString * path = [NSString stringWithFormat:@"payment/%d", paymentID ? paymentID : 0];
+    //GET payment/id always returns and array - this screws up
+    [self.objectManager getObjectsAtPath:path parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        NSArray *payments = [mappingResult array];
+        if(payments.count != 1){
+            failure(WRONG_OBJECT,[NSString stringWithFormat:@"No payment exists for id %d",paymentID],nil);
+        }else{
+            SPPayment *first = [mappingResult firstObject];
+            [self copyPayment:first];
+            success(self);
+        }
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        NSNumber *errorCode;
+        NSString *errorMessage;
+        NSData * bodyData = operation.HTTPRequestOperation.request.HTTPBody;
+        NSString * bodyString = [[NSString alloc] initWithData:bodyData encoding:NSUTF8StringEncoding];
+        NSLog(@"body string: %@",bodyString);
+        [SPRemoteResource responseSanityCheck:[SPRemoteResource responseFromOperation:operation.HTTPRequestOperation] errorCode:&errorCode errorMessage:&errorMessage];
+        failure(errorCode ? errorCode.integerValue : 0,errorMessage,error);
+    }];
+    /*
+    [self.objectManager getObject:self path:path parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        NSLog(@"get payment request complete!");
+        NSLog(@"CC Redacted: %@",self.cc_redacted_number);
+        NSLog(@"CC name    : %@",self.cc_name_on_card);
+        NSLog(@"paymentID  : %@",self.paymentID);
+        success(self);
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        NSNumber *errorCode;
+        NSString *errorMessage;
+        NSData * bodyData = operation.HTTPRequestOperation.request.HTTPBody;
+        NSString * bodyString = [[NSString alloc] initWithData:bodyData encoding:NSUTF8StringEncoding];
+        NSLog(@"body string: %@",bodyString);
+        [SPRemoteResource responseSanityCheck:[SPRemoteResource responseFromOperation:operation.HTTPRequestOperation] errorCode:&errorCode errorMessage:&errorMessage];
+        failure(errorCode ? errorCode.integerValue : 0,errorMessage,error);
+    }];
+    */
+}
+
+// =( because it was easier than trying to mod restkit
+-(void) copyPayment:(SPPayment*)source{
+    unsigned int outCount, i;
+    objc_property_t *properties = class_copyPropertyList([self class], &outCount);
+    for (i = 0; i < outCount; i++) {
+        objc_property_t property = properties[i];
+        NSString *propertyName = [[NSString alloc]
+                                  initWithCString:property_getName(property) encoding:NSUTF8StringEncoding];
+        id sourceValue = [source valueForKeyPath:propertyName];
+        [self setValue:sourceValue forKeyPath:propertyName];
+    }
+    free(properties);
+}
+
 
 @end
