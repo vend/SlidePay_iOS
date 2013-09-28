@@ -27,7 +27,6 @@
 		0E8ECE2C17B2C7DD000EFE1C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E8ECE2A17B2C7DD000EFE1C /* InfoPlist.strings */; };
 		0E8ECE2F17B2C7DD000EFE1C /* SlidePayCoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8ECE2E17B2C7DD000EFE1C /* SlidePayCoreTests.m */; };
 		0EB81F0417B4751A00F5F65A /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB81F0317B4751A00F5F65A /* libstdc++.dylib */; };
-		CC7F31A327D74DD7AEB43D2B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B7213FA62E04AFCA88365F2 /* libPods.a */; };
 		FA0C209C17F5FB52003789F1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0C209B17F5FB52003789F1 /* MobileCoreServices.framework */; };
 		FA0C209E17F5FB59003789F1 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0C209D17F5FB59003789F1 /* CFNetwork.framework */; };
 		FA0C20A017F5FB74003789F1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0C209F17F5FB74003789F1 /* Security.framework */; };
@@ -38,6 +37,10 @@
 		FA9D4ABD17F0E25D00A335CA /* SPPayment.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9D4ABC17F0E25D00A335CA /* SPPayment.m */; };
 		FA9D4AC117F1FE7C00A335CA /* SPAuthenticate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9D4AC017F1FE7C00A335CA /* SPAuthenticate.m */; };
 		FAD014F517F6099400758187 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD014F417F6099400758187 /* UIKit.framework */; };
+		FAD014FA17F6DEA200758187 /* SPAuthenticate.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = FA9D4ABF17F1FE7B00A335CA /* SPAuthenticate.h */; };
+		FAD014FB17F6DEA200758187 /* SPPayment.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = FA9D4ABB17F0E25D00A335CA /* SPPayment.h */; };
+		FAD014FC17F6DEA200758187 /* SPRemoteResource.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = FA9D4AB817F0AF5900A335CA /* SPRemoteResource.h */; };
+		FAD014FE17F6DF1900758187 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD014FD17F6DF1900758187 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +60,9 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				FAD014FA17F6DEA200758187 /* SPAuthenticate.h in CopyFiles */,
+				FAD014FB17F6DEA200758187 /* SPPayment.h in CopyFiles */,
+				FAD014FC17F6DEA200758187 /* SPRemoteResource.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +95,7 @@
 		FA9D4ABF17F1FE7B00A335CA /* SPAuthenticate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPAuthenticate.h; path = ../SPAuthenticate.h; sourceTree = "<group>"; };
 		FA9D4AC017F1FE7C00A335CA /* SPAuthenticate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPAuthenticate.m; path = ../SPAuthenticate.m; sourceTree = "<group>"; };
 		FAD014F417F6099400758187 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		FAD014FD17F6DF1900758187 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,7 +108,6 @@
 				FA0C209C17F5FB52003789F1 /* MobileCoreServices.framework in Frameworks */,
 				0EB81F0417B4751A00F5F65A /* libstdc++.dylib in Frameworks */,
 				0E8ECE1117B2C7DD000EFE1C /* Foundation.framework in Frameworks */,
-				CC7F31A327D74DD7AEB43D2B /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAD014FE17F6DF1900758187 /* libPods.a in Frameworks */,
 				FAD014F517F6099400758187 /* UIKit.framework in Frameworks */,
 				FA0C20A317F5FB88003789F1 /* CFNetwork.framework in Frameworks */,
 				FA0C20A217F5FB83003789F1 /* MobileCoreServices.framework in Frameworks */,
@@ -146,6 +153,7 @@
 		0E8ECE0F17B2C7DD000EFE1C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FAD014FD17F6DF1900758187 /* libPods.a */,
 				FAD014F417F6099400758187 /* UIKit.framework */,
 				FA0C20A617F607F1003789F1 /* libPods.a */,
 				FA0C20A417F607CD003789F1 /* libPods.a */,
@@ -541,6 +549,7 @@
 				FAD014F817F6DA3F00758187 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
