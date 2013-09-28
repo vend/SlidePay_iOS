@@ -2,7 +2,7 @@ mobile-slidepay-core
 =====================
 
 ## About
-SlidePay iOS SDK allows you quickly and easily process swiped and keyed credit card transactions.  Currently, this library is for iOS 5.0+.
+The SlidePay iOS SDK allows you to incorporate swiped and keyed credit card transactions into your iOS application.
 
 
 ## Installation Guide
