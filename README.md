@@ -7,15 +7,15 @@ The SlidePay iOS SDK allows you to incorporate swiped and keyed credit card tran
 
 ##Installation
 
-Clone the repo
+Clone the repo:
 ```
 git clone git@github.com:SlidePay/SlidePay_iOS.git
 ```
-Setup cocoapods and run
+From the repo directory, run:
 ```
 pod install
 ```
-from the directory you cloned into.
+
 
 ## Code Snippets
 Before using any other parts of the API, you must authenticate:
