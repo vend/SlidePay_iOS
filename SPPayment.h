@@ -56,7 +56,11 @@ typedef void(^GetPaymentSuccess)(SPPayment*);
 /**
  *  Creates, but does not process, a card present transaction.
  *
- *  @param paymentDict The dictionary containing the key/value pairs created from a credit card swipe. The two hardware libraries, magtek and rambler, both provide NSDictionary output in the appropriate format. Please see those classes for details.
+ *  @param paymentDict The dictionary containing the key/value pairs created from a credit card swipe. The two hardware libraries, magtek and rambler, both provide NSDictionary output in the appropriate format. The format is as follows: 
+ Key:"vendor"    Value:"magensa" or "magtek"
+ Key:"ksn"       Value:<device ksn>
+ Key:"trackdata" Value:<encrypted track data: -getResponseData if using magensa, -getTrack2 otherwise>
+ Key:"serial"    Value:<device serial number>
  *
  *
  *  @return An initialized card present payment transaction. The payment is only processed when -payWithSuccessHandler:failure: is called.
