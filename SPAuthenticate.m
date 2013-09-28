@@ -13,9 +13,7 @@
 -(id) init{
     [SPRemoteResource reset];
     if (self = [super init]) {
-        
-        
-        
+
     }
     return self;
 }
