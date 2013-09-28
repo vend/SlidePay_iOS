@@ -6,27 +6,38 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		FAD014F617F6DA3F00758187 /* Documentation */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = FAD014F917F6DA3F00758187 /* Build configuration list for PBXAggregateTarget "Documentation" */;
+			buildPhases = (
+			);
+			dependencies = (
+			);
+			name = Documentation;
+			productName = Documentation;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		0E8ECE1117B2C7DD000EFE1C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E8ECE1017B2C7DD000EFE1C /* Foundation.framework */; };
-		0E8ECE1617B2C7DD000EFE1C /* SlidePayCore.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0E8ECE1517B2C7DD000EFE1C /* SlidePayCore.h */; };
-		0E8ECE1817B2C7DD000EFE1C /* SlidePayCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8ECE1717B2C7DD000EFE1C /* SlidePayCore.m */; };
 		0E8ECE2017B2C7DD000EFE1C /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E8ECE1F17B2C7DD000EFE1C /* SenTestingKit.framework */; };
-		0E8ECE2217B2C7DD000EFE1C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E8ECE2117B2C7DD000EFE1C /* UIKit.framework */; };
 		0E8ECE2317B2C7DD000EFE1C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E8ECE1017B2C7DD000EFE1C /* Foundation.framework */; };
 		0E8ECE2617B2C7DD000EFE1C /* libSlidePayCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E8ECE0D17B2C7DD000EFE1C /* libSlidePayCore.a */; };
 		0E8ECE2C17B2C7DD000EFE1C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E8ECE2A17B2C7DD000EFE1C /* InfoPlist.strings */; };
 		0E8ECE2F17B2C7DD000EFE1C /* SlidePayCoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8ECE2E17B2C7DD000EFE1C /* SlidePayCoreTests.m */; };
-		0EB81F0017B4750A00F5F65A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB81EFF17B4750A00F5F65A /* AudioToolbox.framework */; };
-		0EB81F0217B4751100F5F65A /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB81F0117B4751100F5F65A /* ExternalAccessory.framework */; };
 		0EB81F0417B4751A00F5F65A /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB81F0317B4751A00F5F65A /* libstdc++.dylib */; };
-		0EB81F0617B4751F00F5F65A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB81F0517B4751F00F5F65A /* MediaPlayer.framework */; };
-		0EB81F0817B4752600F5F65A /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB81F0717B4752600F5F65A /* CoreAudio.framework */; };
-		0EB81F0A17B4752C00F5F65A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB81F0917B4752C00F5F65A /* CoreLocation.framework */; };
-		0EB81F1317B475BD00F5F65A /* AudioCaptureRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EB81F0B17B475BD00F5F65A /* AudioCaptureRecorder.m */; };
-		0EB81F1417B475BD00F5F65A /* libMTSCRA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB81F0C17B475BD00F5F65A /* libMTSCRA.a */; };
-		0EB81F1517B475BD00F5F65A /* AudioReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0EB81F0E17B475BD00F5F65A /* AudioReader.cpp */; };
-		0EB81F1617B475BD00F5F65A /* libReaderAPI-1.3.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB81F1117B475BD00F5F65A /* libReaderAPI-1.3.1.a */; };
-		0EB81F1717B47AD400F5F65A /* SlidePayCoreEnumerations.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0EB81EFE17B46EE400F5F65A /* SlidePayCoreEnumerations.h */; };
+		CC7F31A327D74DD7AEB43D2B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B7213FA62E04AFCA88365F2 /* libPods.a */; };
+		FA0C209C17F5FB52003789F1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0C209B17F5FB52003789F1 /* MobileCoreServices.framework */; };
+		FA0C209E17F5FB59003789F1 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0C209D17F5FB59003789F1 /* CFNetwork.framework */; };
+		FA0C20A017F5FB74003789F1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0C209F17F5FB74003789F1 /* Security.framework */; };
+		FA0C20A117F5FB7D003789F1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0C209F17F5FB74003789F1 /* Security.framework */; };
+		FA0C20A217F5FB83003789F1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0C209B17F5FB52003789F1 /* MobileCoreServices.framework */; };
+		FA0C20A317F5FB88003789F1 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0C209D17F5FB59003789F1 /* CFNetwork.framework */; };
+		FA9D4ABA17F0AF5900A335CA /* SPRemoteResource.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9D4AB917F0AF5900A335CA /* SPRemoteResource.m */; };
+		FA9D4ABD17F0E25D00A335CA /* SPPayment.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9D4ABC17F0E25D00A335CA /* SPPayment.m */; };
+		FA9D4AC117F1FE7C00A335CA /* SPAuthenticate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9D4AC017F1FE7C00A335CA /* SPAuthenticate.m */; };
+		FAD014F517F6099400758187 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD014F417F6099400758187 /* UIKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,12 +53,10 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		0E8ECE0B17B2C7DD000EFE1C /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
-				0EB81F1717B47AD400F5F65A /* SlidePayCoreEnumerations.h in CopyFiles */,
-				0E8ECE1617B2C7DD000EFE1C /* SlidePayCore.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,8 +66,6 @@
 		0E8ECE0D17B2C7DD000EFE1C /* libSlidePayCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSlidePayCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E8ECE1017B2C7DD000EFE1C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0E8ECE1417B2C7DD000EFE1C /* SlidePayCore-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SlidePayCore-Prefix.pch"; sourceTree = "<group>"; };
-		0E8ECE1517B2C7DD000EFE1C /* SlidePayCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SlidePayCore.h; sourceTree = "<group>"; };
-		0E8ECE1717B2C7DD000EFE1C /* SlidePayCore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SlidePayCore.m; sourceTree = "<group>"; };
 		0E8ECE1E17B2C7DD000EFE1C /* SlidePayCoreTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SlidePayCoreTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E8ECE1F17B2C7DD000EFE1C /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		0E8ECE2117B2C7DD000EFE1C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -66,21 +73,22 @@
 		0E8ECE2B17B2C7DD000EFE1C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0E8ECE2D17B2C7DD000EFE1C /* SlidePayCoreTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SlidePayCoreTests.h; sourceTree = "<group>"; };
 		0E8ECE2E17B2C7DD000EFE1C /* SlidePayCoreTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SlidePayCoreTests.m; sourceTree = "<group>"; };
-		0EB81EFE17B46EE400F5F65A /* SlidePayCoreEnumerations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SlidePayCoreEnumerations.h; sourceTree = "<group>"; };
-		0EB81EFF17B4750A00F5F65A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		0EB81F0117B4751100F5F65A /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		0EB81F0317B4751A00F5F65A /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
-		0EB81F0517B4751F00F5F65A /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		0EB81F0717B4752600F5F65A /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
-		0EB81F0917B4752C00F5F65A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		0EB81F0B17B475BD00F5F65A /* AudioCaptureRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioCaptureRecorder.m; sourceTree = "<group>"; };
-		0EB81F0C17B475BD00F5F65A /* libMTSCRA.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMTSCRA.a; sourceTree = "<group>"; };
-		0EB81F0D17B475BD00F5F65A /* AudioCaptureRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioCaptureRecorder.h; sourceTree = "<group>"; };
-		0EB81F0E17B475BD00F5F65A /* AudioReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioReader.cpp; sourceTree = "<group>"; };
-		0EB81F0F17B475BD00F5F65A /* AudioReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioReader.h; sourceTree = "<group>"; };
-		0EB81F1017B475BD00F5F65A /* MTSCRA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSCRA.h; sourceTree = "<group>"; };
-		0EB81F1117B475BD00F5F65A /* libReaderAPI-1.3.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libReaderAPI-1.3.1.a"; sourceTree = "<group>"; };
-		0EB81F1217B475BD00F5F65A /* ReaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderController.h; sourceTree = "<group>"; };
+		2B7213FA62E04AFCA88365F2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE0F50EEB6C84331A0F315B9 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		FA0C209917F5FA8E003789F1 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		FA0C209B17F5FB52003789F1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		FA0C209D17F5FB59003789F1 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		FA0C209F17F5FB74003789F1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		FA0C20A417F607CD003789F1 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		FA0C20A617F607F1003789F1 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		FA9D4AB817F0AF5900A335CA /* SPRemoteResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPRemoteResource.h; sourceTree = "<group>"; };
+		FA9D4AB917F0AF5900A335CA /* SPRemoteResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPRemoteResource.m; sourceTree = "<group>"; };
+		FA9D4ABB17F0E25D00A335CA /* SPPayment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPPayment.h; path = ../SPPayment.h; sourceTree = "<group>"; };
+		FA9D4ABC17F0E25D00A335CA /* SPPayment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPPayment.m; path = ../SPPayment.m; sourceTree = "<group>"; };
+		FA9D4ABF17F1FE7B00A335CA /* SPAuthenticate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPAuthenticate.h; path = ../SPAuthenticate.h; sourceTree = "<group>"; };
+		FA9D4AC017F1FE7C00A335CA /* SPAuthenticate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPAuthenticate.m; path = ../SPAuthenticate.m; sourceTree = "<group>"; };
+		FAD014F417F6099400758187 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,15 +96,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EB81F0A17B4752C00F5F65A /* CoreLocation.framework in Frameworks */,
-				0EB81F0817B4752600F5F65A /* CoreAudio.framework in Frameworks */,
-				0EB81F0617B4751F00F5F65A /* MediaPlayer.framework in Frameworks */,
+				FA0C20A017F5FB74003789F1 /* Security.framework in Frameworks */,
+				FA0C209E17F5FB59003789F1 /* CFNetwork.framework in Frameworks */,
+				FA0C209C17F5FB52003789F1 /* MobileCoreServices.framework in Frameworks */,
 				0EB81F0417B4751A00F5F65A /* libstdc++.dylib in Frameworks */,
-				0EB81F0217B4751100F5F65A /* ExternalAccessory.framework in Frameworks */,
-				0EB81F0017B4750A00F5F65A /* AudioToolbox.framework in Frameworks */,
 				0E8ECE1117B2C7DD000EFE1C /* Foundation.framework in Frameworks */,
-				0EB81F1417B475BD00F5F65A /* libMTSCRA.a in Frameworks */,
-				0EB81F1617B475BD00F5F65A /* libReaderAPI-1.3.1.a in Frameworks */,
+				CC7F31A327D74DD7AEB43D2B /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,8 +109,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAD014F517F6099400758187 /* UIKit.framework in Frameworks */,
+				FA0C20A317F5FB88003789F1 /* CFNetwork.framework in Frameworks */,
+				FA0C20A217F5FB83003789F1 /* MobileCoreServices.framework in Frameworks */,
+				FA0C20A117F5FB7D003789F1 /* Security.framework in Frameworks */,
 				0E8ECE2017B2C7DD000EFE1C /* SenTestingKit.framework in Frameworks */,
-				0E8ECE2217B2C7DD000EFE1C /* UIKit.framework in Frameworks */,
 				0E8ECE2317B2C7DD000EFE1C /* Foundation.framework in Frameworks */,
 				0E8ECE2617B2C7DD000EFE1C /* libSlidePayCore.a in Frameworks */,
 			);
@@ -117,16 +125,12 @@
 		0E8ECE0417B2C7DD000EFE1C = {
 			isa = PBXGroup;
 			children = (
-				0EB81F0917B4752C00F5F65A /* CoreLocation.framework */,
-				0EB81F0717B4752600F5F65A /* CoreAudio.framework */,
-				0EB81F0517B4751F00F5F65A /* MediaPlayer.framework */,
 				0EB81F0317B4751A00F5F65A /* libstdc++.dylib */,
-				0EB81F0117B4751100F5F65A /* ExternalAccessory.framework */,
-				0EB81EFF17B4750A00F5F65A /* AudioToolbox.framework */,
 				0E8ECE1217B2C7DD000EFE1C /* SlidePayCore */,
 				0E8ECE2717B2C7DD000EFE1C /* SlidePayCoreTests */,
 				0E8ECE0F17B2C7DD000EFE1C /* Frameworks */,
 				0E8ECE0E17B2C7DD000EFE1C /* Products */,
+				EE0F50EEB6C84331A0F315B9 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -142,9 +146,17 @@
 		0E8ECE0F17B2C7DD000EFE1C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FAD014F417F6099400758187 /* UIKit.framework */,
+				FA0C20A617F607F1003789F1 /* libPods.a */,
+				FA0C20A417F607CD003789F1 /* libPods.a */,
+				FA0C209F17F5FB74003789F1 /* Security.framework */,
+				FA0C209D17F5FB59003789F1 /* CFNetwork.framework */,
+				FA0C209B17F5FB52003789F1 /* MobileCoreServices.framework */,
+				FA0C209917F5FA8E003789F1 /* libPods.a */,
 				0E8ECE1017B2C7DD000EFE1C /* Foundation.framework */,
 				0E8ECE1F17B2C7DD000EFE1C /* SenTestingKit.framework */,
 				0E8ECE2117B2C7DD000EFE1C /* UIKit.framework */,
+				2B7213FA62E04AFCA88365F2 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -152,18 +164,13 @@
 		0E8ECE1217B2C7DD000EFE1C /* SlidePayCore */ = {
 			isa = PBXGroup;
 			children = (
-				0EB81F0B17B475BD00F5F65A /* AudioCaptureRecorder.m */,
-				0EB81F0C17B475BD00F5F65A /* libMTSCRA.a */,
-				0EB81F0D17B475BD00F5F65A /* AudioCaptureRecorder.h */,
-				0EB81F0E17B475BD00F5F65A /* AudioReader.cpp */,
-				0EB81F0F17B475BD00F5F65A /* AudioReader.h */,
-				0EB81F1017B475BD00F5F65A /* MTSCRA.h */,
-				0EB81F1117B475BD00F5F65A /* libReaderAPI-1.3.1.a */,
-				0EB81F1217B475BD00F5F65A /* ReaderController.h */,
-				0E8ECE1517B2C7DD000EFE1C /* SlidePayCore.h */,
-				0E8ECE1717B2C7DD000EFE1C /* SlidePayCore.m */,
+				FA9D4ABF17F1FE7B00A335CA /* SPAuthenticate.h */,
+				FA9D4AC017F1FE7C00A335CA /* SPAuthenticate.m */,
+				FA9D4ABB17F0E25D00A335CA /* SPPayment.h */,
+				FA9D4ABC17F0E25D00A335CA /* SPPayment.m */,
+				FA9D4AB817F0AF5900A335CA /* SPRemoteResource.h */,
+				FA9D4AB917F0AF5900A335CA /* SPRemoteResource.m */,
 				0E8ECE1317B2C7DD000EFE1C /* Supporting Files */,
-				0EB81EFE17B46EE400F5F65A /* SlidePayCoreEnumerations.h */,
 			);
 			path = SlidePayCore;
 			sourceTree = "<group>";
@@ -202,9 +209,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0E8ECE3217B2C7DD000EFE1C /* Build configuration list for PBXNativeTarget "SlidePayCore" */;
 			buildPhases = (
+				3D451557CA224A1C86F232D7 /* Check Pods Manifest.lock */,
 				0E8ECE0917B2C7DD000EFE1C /* Sources */,
 				0E8ECE0A17B2C7DD000EFE1C /* Frameworks */,
 				0E8ECE0B17B2C7DD000EFE1C /* CopyFiles */,
+				ABA0620CD4A64B74A8170F40 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -257,6 +266,7 @@
 			targets = (
 				0E8ECE0C17B2C7DD000EFE1C /* SlidePayCore */,
 				0E8ECE1D17B2C7DD000EFE1C /* SlidePayCoreTests */,
+				FAD014F617F6DA3F00758187 /* Documentation */,
 			);
 		};
 /* End PBXProject section */
@@ -286,6 +296,36 @@
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
 		};
+		3D451557CA224A1C86F232D7 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		ABA0620CD4A64B74A8170F40 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -293,9 +333,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E8ECE1817B2C7DD000EFE1C /* SlidePayCore.m in Sources */,
-				0EB81F1317B475BD00F5F65A /* AudioCaptureRecorder.m in Sources */,
-				0EB81F1517B475BD00F5F65A /* AudioReader.cpp in Sources */,
+				FA9D4ABA17F0AF5900A335CA /* SPRemoteResource.m in Sources */,
+				FA9D4ABD17F0E25D00A335CA /* SPPayment.m in Sources */,
+				FA9D4AC117F1FE7C00A335CA /* SPAuthenticate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,6 +424,7 @@
 		};
 		0E8ECE3317B2C7DD000EFE1C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EE0F50EEB6C84331A0F315B9 /* Pods.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/SlidePayCore.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -392,7 +433,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/SlidePayCore\"",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "$(inherited),-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -400,6 +441,7 @@
 		};
 		0E8ECE3417B2C7DD000EFE1C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EE0F50EEB6C84331A0F315B9 /* Pods.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/SlidePayCore.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -408,7 +450,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/SlidePayCore\"",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "$(inherited),-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -416,6 +458,7 @@
 		};
 		0E8ECE3617B2C7DD000EFE1C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EE0F50EEB6C84331A0F315B9 /* Pods.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
@@ -423,6 +466,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SlidePayCore/SlidePayCore-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "SlidePayCoreTests/SlidePayCoreTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
@@ -431,6 +475,7 @@
 		};
 		0E8ECE3717B2C7DD000EFE1C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EE0F50EEB6C84331A0F315B9 /* Pods.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
@@ -438,9 +483,24 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SlidePayCore/SlidePayCore-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "SlidePayCoreTests/SlidePayCoreTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+		FAD014F717F6DA3F00758187 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		FAD014F817F6DA3F00758187 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -473,6 +533,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		FAD014F917F6DA3F00758187 /* Build configuration list for PBXAggregateTarget "Documentation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FAD014F717F6DA3F00758187 /* Debug */,
+				FAD014F817F6DA3F00758187 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

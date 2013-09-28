@@ -8,6 +8,10 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 
-@interface SlidePayCoreTests : SenTestCase
+@interface SlidePayCoreTests : SenTestCase{
+    BOOL done;
+    NSInteger lastPaymentID;
+}
+
 
 @end
