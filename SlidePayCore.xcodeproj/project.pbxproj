@@ -41,6 +41,7 @@
 		FAD014FB17F6DEA200758187 /* SPPayment.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = FA9D4ABB17F0E25D00A335CA /* SPPayment.h */; };
 		FAD014FC17F6DEA200758187 /* SPRemoteResource.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = FA9D4AB817F0AF5900A335CA /* SPRemoteResource.h */; };
 		FAD014FE17F6DF1900758187 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD014FD17F6DF1900758187 /* libPods.a */; };
+		FAD0158F17F6ECAE00758187 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD0158E17F6ECAE00758187 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,7 +96,8 @@
 		FA9D4ABF17F1FE7B00A335CA /* SPAuthenticate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPAuthenticate.h; path = ../SPAuthenticate.h; sourceTree = "<group>"; };
 		FA9D4AC017F1FE7C00A335CA /* SPAuthenticate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPAuthenticate.m; path = ../SPAuthenticate.m; sourceTree = "<group>"; };
 		FAD014F417F6099400758187 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		FAD014FD17F6DF1900758187 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		FAD014FD17F6DF1900758187 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		FAD0158E17F6ECAE00758187 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAD0158F17F6ECAE00758187 /* SystemConfiguration.framework in Frameworks */,
 				FA0C20A017F5FB74003789F1 /* Security.framework in Frameworks */,
 				FA0C209E17F5FB59003789F1 /* CFNetwork.framework in Frameworks */,
 				FA0C209C17F5FB52003789F1 /* MobileCoreServices.framework in Frameworks */,
@@ -153,6 +156,7 @@
 		0E8ECE0F17B2C7DD000EFE1C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FAD0158E17F6ECAE00758187 /* SystemConfiguration.framework */,
 				FAD014FD17F6DF1900758187 /* libPods.a */,
 				FAD014F417F6099400758187 /* UIKit.framework */,
 				FA0C20A617F607F1003789F1 /* libPods.a */,

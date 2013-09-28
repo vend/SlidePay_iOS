@@ -11,10 +11,10 @@ Pod::Spec.new do |s|
     'Alex Garcia' => 'alex@slidepay.com'
   }
   s.source = {
-    :git => 'git@github.com:cubebright/SlidePay_iOS.git',
+    :git => 'https://github.com/cubebright/SlidePay_iOS.git',
     :tag => '0.2.0'
   }
-  s.header_dir   = SlidePay
+  s.header_dir   = 'SlidePay'
   s.source_files = '*.{h,m}','SlidePayCore/*.{h,m}'
   s.dependency     'RestKit'
 end
