@@ -21,8 +21,8 @@ typedef void(^PermissionsSuccessBlock)();
 
 @interface SPAuthenticate : SPRemoteResource
 
-@property (nonatomic) NSString *username;
-@property (nonatomic) NSString *password;
+@property (nonatomic,copy) NSString *username;
+@property (nonatomic,copy) NSString *password;
 
 /**
  *  Logs you in.

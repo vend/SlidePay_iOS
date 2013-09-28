@@ -115,10 +115,10 @@ typedef void(^GetPaymentSuccess)(SPPayment*);
 -(void) getPaymentWithID:(NSInteger)paymentID success:(GetPaymentSuccess)success failure:(ResourceFailureBlock)failure;
 
 
-@property NSNumber * amount;
-@property NSString * notes;
-@property NSString * latitude;
-@property NSString * longitude;
+@property (nonatomic, strong)NSNumber * amount;
+@property (nonatomic, copy)NSString * notes;
+@property (nonatomic, copy)NSString * latitude;
+@property (nonatomic, copy)NSString * longitude;
 @property (readonly) NSNumber * paymentID;
 
 
