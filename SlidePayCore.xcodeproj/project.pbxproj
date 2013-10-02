@@ -26,13 +26,13 @@
 		0E8ECE2617B2C7DD000EFE1C /* libSlidePayCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E8ECE0D17B2C7DD000EFE1C /* libSlidePayCore.a */; };
 		0E8ECE2C17B2C7DD000EFE1C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E8ECE2A17B2C7DD000EFE1C /* InfoPlist.strings */; };
 		0E8ECE2F17B2C7DD000EFE1C /* SlidePayCoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8ECE2E17B2C7DD000EFE1C /* SlidePayCoreTests.m */; };
-		0EB81F0417B4751A00F5F65A /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB81F0317B4751A00F5F65A /* libstdc++.dylib */; };
 		FA0C209C17F5FB52003789F1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0C209B17F5FB52003789F1 /* MobileCoreServices.framework */; };
 		FA0C209E17F5FB59003789F1 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0C209D17F5FB59003789F1 /* CFNetwork.framework */; };
 		FA0C20A017F5FB74003789F1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0C209F17F5FB74003789F1 /* Security.framework */; };
 		FA0C20A117F5FB7D003789F1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0C209F17F5FB74003789F1 /* Security.framework */; };
 		FA0C20A217F5FB83003789F1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0C209B17F5FB52003789F1 /* MobileCoreServices.framework */; };
 		FA0C20A317F5FB88003789F1 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0C209D17F5FB59003789F1 /* CFNetwork.framework */; };
+		FA4870F017FC966B00A7D6CE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4870EF17FC966B00A7D6CE /* libPods.a */; };
 		FA9D4ABA17F0AF5900A335CA /* SPRemoteResource.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9D4AB917F0AF5900A335CA /* SPRemoteResource.m */; };
 		FA9D4ABD17F0E25D00A335CA /* SPPayment.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9D4ABC17F0E25D00A335CA /* SPPayment.m */; };
 		FA9D4AC117F1FE7C00A335CA /* SPAuthenticate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9D4AC017F1FE7C00A335CA /* SPAuthenticate.m */; };
@@ -40,7 +40,6 @@
 		FAD014FA17F6DEA200758187 /* SPAuthenticate.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = FA9D4ABF17F1FE7B00A335CA /* SPAuthenticate.h */; };
 		FAD014FB17F6DEA200758187 /* SPPayment.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = FA9D4ABB17F0E25D00A335CA /* SPPayment.h */; };
 		FAD014FC17F6DEA200758187 /* SPRemoteResource.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = FA9D4AB817F0AF5900A335CA /* SPRemoteResource.h */; };
-		FAD014FE17F6DF1900758187 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD014FD17F6DF1900758187 /* libPods.a */; };
 		FAD0158F17F6ECAE00758187 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD0158E17F6ECAE00758187 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,20 +74,16 @@
 		0E8ECE1417B2C7DD000EFE1C /* SlidePayCore-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SlidePayCore-Prefix.pch"; sourceTree = "<group>"; };
 		0E8ECE1E17B2C7DD000EFE1C /* SlidePayCoreTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SlidePayCoreTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E8ECE1F17B2C7DD000EFE1C /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		0E8ECE2117B2C7DD000EFE1C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		0E8ECE2917B2C7DD000EFE1C /* SlidePayCoreTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SlidePayCoreTests-Info.plist"; sourceTree = "<group>"; };
 		0E8ECE2B17B2C7DD000EFE1C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0E8ECE2D17B2C7DD000EFE1C /* SlidePayCoreTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SlidePayCoreTests.h; sourceTree = "<group>"; };
 		0E8ECE2E17B2C7DD000EFE1C /* SlidePayCoreTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SlidePayCoreTests.m; sourceTree = "<group>"; };
 		0EB81F0317B4751A00F5F65A /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
-		2B7213FA62E04AFCA88365F2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE0F50EEB6C84331A0F315B9 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
-		FA0C209917F5FA8E003789F1 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		FA0C209B17F5FB52003789F1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		FA0C209D17F5FB59003789F1 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		FA0C209F17F5FB74003789F1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		FA0C20A417F607CD003789F1 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
-		FA0C20A617F607F1003789F1 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		FA4870EF17FC966B00A7D6CE /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		FA9D4AB817F0AF5900A335CA /* SPRemoteResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPRemoteResource.h; sourceTree = "<group>"; };
 		FA9D4AB917F0AF5900A335CA /* SPRemoteResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPRemoteResource.m; sourceTree = "<group>"; };
 		FA9D4ABB17F0E25D00A335CA /* SPPayment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPPayment.h; path = ../SPPayment.h; sourceTree = "<group>"; };
@@ -96,7 +91,6 @@
 		FA9D4ABF17F1FE7B00A335CA /* SPAuthenticate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPAuthenticate.h; path = ../SPAuthenticate.h; sourceTree = "<group>"; };
 		FA9D4AC017F1FE7C00A335CA /* SPAuthenticate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPAuthenticate.m; path = ../SPAuthenticate.m; sourceTree = "<group>"; };
 		FAD014F417F6099400758187 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		FAD014FD17F6DF1900758187 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		FAD0158E17F6ECAE00758187 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -109,7 +103,6 @@
 				FA0C20A017F5FB74003789F1 /* Security.framework in Frameworks */,
 				FA0C209E17F5FB59003789F1 /* CFNetwork.framework in Frameworks */,
 				FA0C209C17F5FB52003789F1 /* MobileCoreServices.framework in Frameworks */,
-				0EB81F0417B4751A00F5F65A /* libstdc++.dylib in Frameworks */,
 				0E8ECE1117B2C7DD000EFE1C /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -118,7 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAD014FE17F6DF1900758187 /* libPods.a in Frameworks */,
+				FA4870F017FC966B00A7D6CE /* libPods.a in Frameworks */,
 				FAD014F517F6099400758187 /* UIKit.framework in Frameworks */,
 				FA0C20A317F5FB88003789F1 /* CFNetwork.framework in Frameworks */,
 				FA0C20A217F5FB83003789F1 /* MobileCoreServices.framework in Frameworks */,
@@ -156,19 +149,14 @@
 		0E8ECE0F17B2C7DD000EFE1C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FA4870EF17FC966B00A7D6CE /* libPods.a */,
 				FAD0158E17F6ECAE00758187 /* SystemConfiguration.framework */,
-				FAD014FD17F6DF1900758187 /* libPods.a */,
 				FAD014F417F6099400758187 /* UIKit.framework */,
-				FA0C20A617F607F1003789F1 /* libPods.a */,
-				FA0C20A417F607CD003789F1 /* libPods.a */,
 				FA0C209F17F5FB74003789F1 /* Security.framework */,
 				FA0C209D17F5FB59003789F1 /* CFNetwork.framework */,
 				FA0C209B17F5FB52003789F1 /* MobileCoreServices.framework */,
-				FA0C209917F5FA8E003789F1 /* libPods.a */,
 				0E8ECE1017B2C7DD000EFE1C /* Foundation.framework */,
 				0E8ECE1F17B2C7DD000EFE1C /* SenTestingKit.framework */,
-				0E8ECE2117B2C7DD000EFE1C /* UIKit.framework */,
-				2B7213FA62E04AFCA88365F2 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -394,6 +382,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -407,7 +396,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "$(inherited)";
 				SDKROOT = iphoneos;
+				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Debug;
 		};
@@ -424,12 +415,15 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
+				DEAD_CODE_STRIPPING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_LDFLAGS = "$(inherited)";
 				SDKROOT = iphoneos;
+				STRIP_INSTALLED_PRODUCT = NO;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

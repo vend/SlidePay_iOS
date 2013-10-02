@@ -36,7 +36,7 @@ typedef void(^ResourceFailureBlock)(NSInteger serverCode, NSString* serverMessag
  */
 @property (nonatomic,readonly) NSString * endpoint;
 @property (nonatomic,readonly) NSString * authToken;
-@property (nonatomic,copy) RKObjectManager * objectManager;
+@property (nonatomic,strong) RKObjectManager * objectManager;
 @property (nonatomic,readonly) NSString * TAG;
 
 
