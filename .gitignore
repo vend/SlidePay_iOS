@@ -20,3 +20,4 @@ DerivedData
 Pods
 Podfile.lock
 SlidePayCore.xcworkspace
+TestingEnv.h
