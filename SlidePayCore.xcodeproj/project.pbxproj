@@ -83,7 +83,8 @@
 		FA0C209B17F5FB52003789F1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		FA0C209D17F5FB59003789F1 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		FA0C209F17F5FB74003789F1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		FA4870EF17FC966B00A7D6CE /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		FA4870EF17FC966B00A7D6CE /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		FA58BFD017FD0CF50061D50B /* TestingEnv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestingEnv.h; sourceTree = "<group>"; };
 		FA9D4AB817F0AF5900A335CA /* SPRemoteResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPRemoteResource.h; sourceTree = "<group>"; };
 		FA9D4AB917F0AF5900A335CA /* SPRemoteResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPRemoteResource.m; sourceTree = "<group>"; };
 		FA9D4ABB17F0E25D00A335CA /* SPPayment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPPayment.h; path = ../SPPayment.h; sourceTree = "<group>"; };
@@ -189,6 +190,7 @@
 				0E8ECE2D17B2C7DD000EFE1C /* SlidePayCoreTests.h */,
 				0E8ECE2E17B2C7DD000EFE1C /* SlidePayCoreTests.m */,
 				0E8ECE2817B2C7DD000EFE1C /* Supporting Files */,
+				FA58BFD017FD0CF50061D50B /* TestingEnv.h */,
 			);
 			path = SlidePayCoreTests;
 			sourceTree = "<group>";
