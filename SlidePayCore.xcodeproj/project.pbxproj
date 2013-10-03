@@ -25,7 +25,6 @@
 		0E8ECE2317B2C7DD000EFE1C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E8ECE1017B2C7DD000EFE1C /* Foundation.framework */; };
 		0E8ECE2617B2C7DD000EFE1C /* libSlidePayCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E8ECE0D17B2C7DD000EFE1C /* libSlidePayCore.a */; };
 		0E8ECE2C17B2C7DD000EFE1C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E8ECE2A17B2C7DD000EFE1C /* InfoPlist.strings */; };
-		0E8ECE2F17B2C7DD000EFE1C /* SlidePayCoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8ECE2E17B2C7DD000EFE1C /* SlidePayCoreTests.m */; };
 		FA0C209C17F5FB52003789F1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0C209B17F5FB52003789F1 /* MobileCoreServices.framework */; };
 		FA0C209E17F5FB59003789F1 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0C209D17F5FB59003789F1 /* CFNetwork.framework */; };
 		FA0C20A017F5FB74003789F1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0C209F17F5FB74003789F1 /* Security.framework */; };
@@ -33,6 +32,7 @@
 		FA0C20A217F5FB83003789F1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0C209B17F5FB52003789F1 /* MobileCoreServices.framework */; };
 		FA0C20A317F5FB88003789F1 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0C209D17F5FB59003789F1 /* CFNetwork.framework */; };
 		FA4870F017FC966B00A7D6CE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4870EF17FC966B00A7D6CE /* libPods.a */; };
+		FA58BFD217FD228D0061D50B /* SlidePayCoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58BFD117FD228D0061D50B /* SlidePayCoreTests.m */; };
 		FA9D4ABA17F0AF5900A335CA /* SPRemoteResource.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9D4AB917F0AF5900A335CA /* SPRemoteResource.m */; };
 		FA9D4ABD17F0E25D00A335CA /* SPPayment.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9D4ABC17F0E25D00A335CA /* SPPayment.m */; };
 		FA9D4AC117F1FE7C00A335CA /* SPAuthenticate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9D4AC017F1FE7C00A335CA /* SPAuthenticate.m */; };
@@ -77,7 +77,6 @@
 		0E8ECE2917B2C7DD000EFE1C /* SlidePayCoreTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SlidePayCoreTests-Info.plist"; sourceTree = "<group>"; };
 		0E8ECE2B17B2C7DD000EFE1C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0E8ECE2D17B2C7DD000EFE1C /* SlidePayCoreTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SlidePayCoreTests.h; sourceTree = "<group>"; };
-		0E8ECE2E17B2C7DD000EFE1C /* SlidePayCoreTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SlidePayCoreTests.m; sourceTree = "<group>"; };
 		0EB81F0317B4751A00F5F65A /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		EE0F50EEB6C84331A0F315B9 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		FA0C209B17F5FB52003789F1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -85,6 +84,7 @@
 		FA0C209F17F5FB74003789F1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		FA4870EF17FC966B00A7D6CE /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		FA58BFD017FD0CF50061D50B /* TestingEnv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestingEnv.h; sourceTree = "<group>"; };
+		FA58BFD117FD228D0061D50B /* SlidePayCoreTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlidePayCoreTests.m; sourceTree = "<group>"; };
 		FA9D4AB817F0AF5900A335CA /* SPRemoteResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPRemoteResource.h; sourceTree = "<group>"; };
 		FA9D4AB917F0AF5900A335CA /* SPRemoteResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPRemoteResource.m; sourceTree = "<group>"; };
 		FA9D4ABB17F0E25D00A335CA /* SPPayment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPPayment.h; path = ../SPPayment.h; sourceTree = "<group>"; };
@@ -188,7 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				0E8ECE2D17B2C7DD000EFE1C /* SlidePayCoreTests.h */,
-				0E8ECE2E17B2C7DD000EFE1C /* SlidePayCoreTests.m */,
+				FA58BFD117FD228D0061D50B /* SlidePayCoreTests.m */,
 				0E8ECE2817B2C7DD000EFE1C /* Supporting Files */,
 				FA58BFD017FD0CF50061D50B /* TestingEnv.h */,
 			);
@@ -345,7 +345,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E8ECE2F17B2C7DD000EFE1C /* SlidePayCoreTests.m in Sources */,
+				FA58BFD217FD228D0061D50B /* SlidePayCoreTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
