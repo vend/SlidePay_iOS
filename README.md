@@ -13,13 +13,13 @@ $ edit Podfile
 platform :ios, '5.0'
 pod 'SlidePay_iOS', :git => 'https://github.com/SlidePay/SlidePay_iOS.git'
 ```
-
-Save and close. From the command line, do
-```
-pod install
-```
-
 We aren't in the main podspec repo [yet], but this should get you up and running just fine.
+
+Now, for the actual installation, do:
+```
+$ pod install
+```
+That's it! Make sure, as per the instructions that were spit out during the install, to only use the MyProject.xcworkspace when building your project.
 
 ## Code Snippets
 Before using any other parts of the API, you must authenticate:
