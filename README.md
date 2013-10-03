@@ -4,7 +4,22 @@ SlidePay iOS
 ## About
 The SlidePay iOS SDK allows you to incorporate swiped and keyed credit card transactions into your iOS application.
 
+## Installation
+You'll need [cocoapods](http://cocoapods.org/)! Once you've got that installed, open the terminal and:
 
+```
+$ cd /path/to/MyProject
+$ edit Podfile
+platform :ios, '5.0'
+pod 'SlidePay_iOS', :git => 'https://github.com/SlidePay/SlidePay_iOS.git'
+```
+
+Save and close. From the command line, do
+```
+pod install
+```
+
+We aren't in the main podspec repo [yet], but this should get you up and running just fine.
 
 ## Code Snippets
 Before using any other parts of the API, you must authenticate:
