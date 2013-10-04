@@ -9,7 +9,7 @@
 #ifndef SlidePayCore_TestingEnv_h
 #define SlidePayCore_TestingEnv_h
 
-#define SPTESTING_uname @"blerp"
+#define SPTESTING_uname @"as"
 #define SPTESTING_password @""
 #define SPTESTING_magensa @""
 #define SPTESTING_magtek @""
