@@ -31,7 +31,8 @@
 		FA0C20A117F5FB7D003789F1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0C209F17F5FB74003789F1 /* Security.framework */; };
 		FA0C20A217F5FB83003789F1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0C209B17F5FB52003789F1 /* MobileCoreServices.framework */; };
 		FA0C20A317F5FB88003789F1 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0C209D17F5FB59003789F1 /* CFNetwork.framework */; };
-		FA3F913817FF6535008FB505 /* libReaderAPI-1.3.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA3F913617FF6535008FB505 /* libReaderAPI-1.3.1.a */; };
+		FA2473B617FF80BC00A2C626 /* libReaderAPI-2.0.0-beta1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA2473B317FF80BB00A2C626 /* libReaderAPI-2.0.0-beta1.a */; };
+		FA2473B917FF81A800A2C626 /* SwipeListener.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2473B817FF81A800A2C626 /* SwipeListener.m */; };
 		FA4870F017FC966B00A7D6CE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4870EF17FC966B00A7D6CE /* libPods.a */; };
 		FA58BFD217FD228D0061D50B /* SlidePayCoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FA58BFD117FD228D0061D50B /* SlidePayCoreTests.m */; };
 		FA9D4ABA17F0AF5900A335CA /* SPRemoteResource.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9D4AB917F0AF5900A335CA /* SPRemoteResource.m */; };
@@ -83,8 +84,11 @@
 		FA0C209B17F5FB52003789F1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		FA0C209D17F5FB59003789F1 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		FA0C209F17F5FB74003789F1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		FA3F913617FF6535008FB505 /* libReaderAPI-1.3.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libReaderAPI-1.3.1.a"; sourceTree = "<group>"; };
-		FA3F913717FF6535008FB505 /* ReaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderController.h; sourceTree = "<group>"; };
+		FA2473B217FF80BB00A2C626 /* libReaderAPI-2.0.0-beta1-simulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libReaderAPI-2.0.0-beta1-simulator.a"; path = "SlidePayHardware/Rambler/libReaderAPI-2.0.0-beta1-simulator.a"; sourceTree = "<group>"; };
+		FA2473B317FF80BB00A2C626 /* libReaderAPI-2.0.0-beta1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libReaderAPI-2.0.0-beta1.a"; path = "SlidePayHardware/Rambler/libReaderAPI-2.0.0-beta1.a"; sourceTree = "<group>"; };
+		FA2473B417FF80BB00A2C626 /* ReaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReaderController.h; path = SlidePayHardware/Rambler/ReaderController.h; sourceTree = "<group>"; };
+		FA2473B717FF81A800A2C626 /* SwipeListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwipeListener.h; path = SlidePayHardware/Rambler/SwipeListener.h; sourceTree = "<group>"; };
+		FA2473B817FF81A800A2C626 /* SwipeListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SwipeListener.m; path = SlidePayHardware/Rambler/SwipeListener.m; sourceTree = "<group>"; };
 		FA4870EF17FC966B00A7D6CE /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		FA58BFD017FD0CF50061D50B /* TestingEnv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestingEnv.h; sourceTree = "<group>"; };
 		FA58BFD117FD228D0061D50B /* SlidePayCoreTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlidePayCoreTests.m; sourceTree = "<group>"; };
@@ -103,8 +107,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA2473B617FF80BC00A2C626 /* libReaderAPI-2.0.0-beta1.a in Frameworks */,
 				FAD0158F17F6ECAE00758187 /* SystemConfiguration.framework in Frameworks */,
-				FA3F913817FF6535008FB505 /* libReaderAPI-1.3.1.a in Frameworks */,
 				FA0C20A017F5FB74003789F1 /* Security.framework in Frameworks */,
 				FA0C209E17F5FB59003789F1 /* CFNetwork.framework in Frameworks */,
 				FA0C209C17F5FB52003789F1 /* MobileCoreServices.framework in Frameworks */,
@@ -220,8 +224,11 @@
 		FA3F913517FF64CB008FB505 /* Rambler */ = {
 			isa = PBXGroup;
 			children = (
-				FA3F913617FF6535008FB505 /* libReaderAPI-1.3.1.a */,
-				FA3F913717FF6535008FB505 /* ReaderController.h */,
+				FA2473B217FF80BB00A2C626 /* libReaderAPI-2.0.0-beta1-simulator.a */,
+				FA2473B317FF80BB00A2C626 /* libReaderAPI-2.0.0-beta1.a */,
+				FA2473B417FF80BB00A2C626 /* ReaderController.h */,
+				FA2473B717FF81A800A2C626 /* SwipeListener.h */,
+				FA2473B817FF81A800A2C626 /* SwipeListener.m */,
 			);
 			name = Rambler;
 			sourceTree = "<group>";
@@ -357,6 +364,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA2473B917FF81A800A2C626 /* SwipeListener.m in Sources */,
 				FA9D4ABA17F0AF5900A335CA /* SPRemoteResource.m in Sources */,
 				FA9D4ABD17F0E25D00A335CA /* SPPayment.m in Sources */,
 				FA9D4AC117F1FE7C00A335CA /* SPAuthenticate.m in Sources */,
@@ -461,8 +469,9 @@
 				GCC_PREFIX_HEADER = "SlidePayCore/SlidePayCore-Prefix.pch";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)/SlidePayCore\\\"",
+					"\\\\\\\"$(SRCROOT)/SlidePayCore\\\\\\\"",
 					"/Users/Alex/Cube_iOS/SDK_iOS/mobile-slidepay-core",
+					"/Users/Alex/Cube_iOS/SDK_iOS/mobile-slidepay-core/SlidePayHardware/Rambler",
 				);
 				OTHER_LDFLAGS = "$(inherited),-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -479,8 +488,9 @@
 				GCC_PREFIX_HEADER = "SlidePayCore/SlidePayCore-Prefix.pch";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)/SlidePayCore\\\"",
+					"\\\\\\\"$(SRCROOT)/SlidePayCore\\\\\\\"",
 					"/Users/Alex/Cube_iOS/SDK_iOS/mobile-slidepay-core",
+					"/Users/Alex/Cube_iOS/SDK_iOS/mobile-slidepay-core/SlidePayHardware/Rambler",
 				);
 				OTHER_LDFLAGS = "$(inherited),-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";

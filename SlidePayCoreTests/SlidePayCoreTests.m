@@ -9,7 +9,7 @@
 #import "SPAuthenticate.h"
 #import "SPPayment.h"
 #import "TestingEnv.h"
-
+#import "SwipeListener.h"
 
 @interface SlidePayCoreTests ()
 @property (nonatomic,copy) NSString *username;
@@ -259,6 +259,31 @@
     }];
     [self spinYourDamnWheels];
 }
+
+-(void) testSwipeSetup{
+    SwipeListener *listener = [SwipeListener new];
+    listener.swipeCompleteBlock = ^(NSDictionary *swipe,int errorCode, NSString *errorMessage){
+        NSLog(@"Swipe obtained? %@",swipe);
+        if(errorCode > 0){
+            NSLog(@"Error code: %d",errorCode);
+        }
+        if(errorMessage){
+            NSLog(@"Error message: %@",errorMessage);
+        }
+        done = true;
+    };
+    listener.stateChangedBlock = ^(RamblerState status){
+        NSLog(@"state changed block: %d",status);
+    };
+    
+    [listener start];
+    [listener testSwipe];
+    
+    [self spinYourDamnWheels];
+    
+}
+
+
 
 
 @end

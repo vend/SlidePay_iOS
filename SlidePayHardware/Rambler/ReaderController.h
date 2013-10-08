@@ -1,6 +1,6 @@
 //
 //  ReaderController.h
-//  ReaderAPI-1.3.1
+//  ReaderAPI-2.0.0.-beta1
 //
 //  Created by TeresaWong on 3/5/11.
 //  Copyright 2011 BBPOS LTD. All rights reserved.
@@ -43,14 +43,7 @@ typedef enum {
 
 @protocol ReaderControllerDelegate <NSObject>
 
-- (void)onDecodeCompleted:(NSString *)formatID
-                      ksn:(NSString *)ksn
-	   encTrack1AndTrack2:(NSString *)encTrack1AndTrack2
-             track1Length:(int)track1Length
-             track2Length:(int)track2Length
-                maskedPAN:(NSString *)maskedPAN
-               expiryDate:(NSString *)expiryDate
-           cardHolderName:(NSString *)cardHolderName;
+- (void)onDecodeCompleted:(NSDictionary *)data;
 - (void)onGetKsnCompleted:(NSString *)ksn;
 - (void)onDecodeError:(ReaderControllerDecodeResult)decodeState;
 - (void)onDecodingStart;
