@@ -26,19 +26,26 @@ static NSArray * keys = nil;
 -(void) start{
     if(!self.readerController){
         self.readerController = [ReaderController new];
+        self.readerController.delegate = self;
+        self.readerController.detectDeviceChange = YES;
     }
-    
-    self.readerController.delegate = self;
-    self.readerController.detectDeviceChange = YES;
-    
-    if([self.readerController getReaderState] == ReaderControllerStateIdle){
+    ReaderControllerState state = [self.readerController getReaderState];
+    if(state == ReaderControllerStateIdle){
+        NSLog(@"starting reader");
+        [self.readerController startReader];
+    }else{
+//        [self.readerController stopReader];
+        NSLog(@"Not starting reader. State: %d",state);
         [self.readerController startReader];
     }
 }
 -(void) stop{
+    
     if([self.readerController getReaderState] != ReaderControllerStateIdle){
+        NSLog(@"stopping reader");
         [self.readerController stopReader];
     }
+    
 }
 
 -(void) dealloc{
@@ -54,6 +61,7 @@ static NSArray * keys = nil;
     state == ReaderControllerStateDecoding  ? DEVICE_DECODING  :
     state == ReaderControllerStateRecording ? DEVICE_RECORDING :
     DEVICE_WAITING;
+    NSLog(@"state = %d",state);
     return myState;
 }
 
@@ -80,33 +88,13 @@ static NSArray * keys = nil;
                                          };
     
     NSLog(@"decode complete: %@",simplePaymentDict);
+    
     if(self.swipeCompleteBlock){
         self.swipeCompleteBlock(simplePaymentDict,0,nil);
     }
     
-    
-    //        if (expiryDate.length == 4) {
-    //            expiryMonth = [expiryDate substringFromIndex:2];
-    //            expiryYear = [expiryDate substringToIndex:2];
-    //        }
-    
-    
-    
-    
-    //        NSMutableDictionary *temporaryPaymentDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-    //                                                           encTrack1AndTrack2, @"cc_track2data",
-    //                                                           @"rambler", @"encryption_vendor",
-    //                                                           ksn, @"encryption_ksn",
-    //                                                           [NSNumber numberWithDouble:_shared_model.myLocationManager.location.coordinate.longitude], @"longitude",
-    //                                                           [NSNumber numberWithDouble:_shared_model.myLocationManager.location.coordinate.latitude], @"latitude",
-    //                                                           expiryMonth, @"cc_expiry_month",
-    //                                                           expiryYear, @"cc_expiry_year",
-    //                                                           my_redacted_string, @"cc_redacted_number"
-    //
-    //                                                           , nil];
-    
-    //        if (my_redacted_string.length > 0)
-    //            [temporaryPaymentDictionary setObject:my_redacted_string forKey:@"cc_redacted_number"];
+    RamblerState state = [self state];
+    NSLog(@"state after decode: %@",@(state));
     
 }
 - (void)onGetKsnCompleted:(NSString *)ksn;{
@@ -132,12 +120,14 @@ static NSArray * keys = nil;
         self.stateChangedBlock(DEVICE_DECODING);
     }
 }
+
 - (void)onError:(NSString *)errorMessage;{
     NSLog(@"error: %@",errorMessage);
     if(self.swipeCompleteBlock){
         self.swipeCompleteBlock(nil,0,errorMessage);
     }
 }
+
 - (void)onInterrupted;{
     NSLog(@"interrupted");
 }
@@ -153,6 +143,9 @@ static NSArray * keys = nil;
 }
 - (void)onWaitingForCardSwipe;{
     NSLog(@"waiting for card swipe");
+    if(self.stateChangedBlock){
+        self.stateChangedBlock(DEVICE_WAITING_SWIPE);
+    }
 }
 - (void)onWaitingForDevice;{
     NSLog(@"waiting for device");

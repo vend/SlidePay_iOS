@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.license      = 'LICENSE'
   s.authors      = { "SlidePay" => "api@slidepay.com", "Alex Garcia" => "alex@slidepay.com" }
   s.platform     = :ios, '6.0'
-  s.source       = { :git => "https://github.com/SlidePay/SlidePay_iOS.git", :branch => "develop"}
+  s.source       = {:git => "https://github.com/SlidePay/SlidePay_iOS.git"}#, :tag => s.version}
   #s.source_files = 'SlidePayCore/','*.h','*.m'
   s.requires_arc = true
   #s.dependency 'RestKit', '~>0.20.0'
@@ -20,8 +20,8 @@ Pod::Spec.new do |s|
 
   s.subspec 'Rambler' do |sr|
 	sr.source_files = 'SlidePayHardware/Rambler/','*.h','*.m'
-	sr.libraries = 'SlidePayHardware/Rambler/','*.a'
-	sm.vendored_libraries 
+	sr.libraries = 'SlidePayHardware/Rambler/libReaderAPI-2.0.0-beta1','libReaderAPI-2.0.0-beta1.a'
+	sr.vendored_libraries = 'SlidePayHardware/Rambler/libReaderAPI-2.0.0-beta1.a'
 	sr.ios.frameworks = 'AudioToolBox','CoreAudio','MediaPlayer' 
   end
   
