@@ -123,8 +123,11 @@ typedef void(^GetPaymentSuccess)(SPPayment*);
  @return A JSON representation of this object as an NSString. It is appropriate for use with the payment/simple API.
  */
 -(NSString*) asJSON;
+
 /**
- @return A representation of this payment as an NSDictionary. The key names match those of a JSON string representation appropriate for payment submission through the payment/simple API.
+ @return A representation of this payment as an NSDictionary. The key names are consistent w/ those necessary for payment through the payment/simple API.
+ 
+ @see asJSON
  */
 -(NSDictionary *) asJSONObject;
 
