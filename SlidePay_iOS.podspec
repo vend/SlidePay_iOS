@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "SlidePay_iOS"
-  s.version      = "0.0.1"
+  s.version      = "0.1.1"
   s.summary      = "Core SDK for SlidePay"
   s.homepage     = "https://github.com/SlidePay/SlidePay_iOS"
   s.license      = 'LICENSE'
