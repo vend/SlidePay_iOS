@@ -13,7 +13,7 @@ platform :ios, '5.0'
 pod 'SlidePay_iOS', :git => 'https://github.com/SlidePay/SlidePay_iOS.git'
 ```
 
-The SlidePay iOS SDK isn't in the main podspec repo [yet], so this workaround will have to suffice. If you already have a podfile, then add our repo to your list of pods. 
+The SlidePay iOS SDK isn't in the main podspec repo [yet], so specifying the repo via :git will have to do in the interim. If you already have a podfile, then add our repo to your list of pods. 
 
 Finally, do:
 ```
@@ -23,7 +23,7 @@ Make sure, as per the instructions that were spit out during the install, to onl
 
 #Subspecs
 
-The subspecs can, broadly, be divided into two categories: hardware, and everything else. If you're using your own solution for swiping (or don't care about swiping), then you only need the 'Payments' subspec. Your podfile would look like: 
+The subspecs can, broadly, be divided into two categories: hardware, and everything else. If you're using your own solution for swiping (or don't care about it), then you only need the 'Payments' subspec. Your podfile would look like: 
 
 ```
 platform :ios, '5.0'
