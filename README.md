@@ -13,9 +13,9 @@ $ edit Podfile
 platform :ios, '5.0'
 pod 'SlidePay_iOS', :git => 'https://github.com/SlidePay/SlidePay_iOS.git'
 ```
-We aren't in the main podspec repo [yet], but this should get you up and running just fine.
+We aren't in the main podspec repo [yet], so this workaround will have to suffice. If you already have a podfile, then simply add our repo to your list of pods (as per the last line)
 
-Now, for the actual installation, do:
+Finally, do:
 ```
 $ pod install
 ```
