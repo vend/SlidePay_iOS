@@ -149,7 +149,8 @@
              @"notes",
              @"method",
              @"latitude",
-             @"longitude"
+             @"longitude",
+             @"device_type"
              ];
 }
 
@@ -270,6 +271,7 @@
 
 // =( because it was easier than trying to mod restkit
 -(void) copyPayment:(SPPayment*)source{
+    
     unsigned int outCount, i;
     objc_property_t *properties = class_copyPropertyList([self class], &outCount);
     for (i = 0; i < outCount; i++) {
@@ -280,6 +282,7 @@
         [self setValue:sourceValue forKeyPath:propertyName];
     }
     free(properties);
+    
 }
 
 #pragma mark Different Payment representations
