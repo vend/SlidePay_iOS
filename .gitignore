@@ -21,3 +21,4 @@ Pods
 Podfile.lock
 SlidePayCore.xcworkspace
 SlidePayCoreTests/TestingEnv.h
+TestingEnv.h

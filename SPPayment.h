@@ -37,6 +37,8 @@ typedef void(^GetPaymentSuccess)(SPPayment*);
 
  To pay, initialize the payment, set the amount property, and call payWithSuccessHandler:failure:
  
+ If you'd like to process the payment from a different device/location, then you can call asJSON to get a JSON string representation of the payment object. This can, for example, be passed to your Rails backend for use with out Ruby SDK.
+ 
  If you don't have access to the payment object you'd like to refund, refundPaymentWithID:success:failure: will refund the payment corrponding to the specified payment id. Otherwise, -refundWithSuccess:failure: will perform a refund on the receiver.
 
  A payment can be retrieved by calling getPaymentWithID:success:failure:
@@ -106,7 +108,7 @@ typedef void(^GetPaymentSuccess)(SPPayment*);
 
 
 /**
- *  Populates the receiver with the remote data corresponding to paymentID parameter
+ *  Populates the receiver with the remote data corresponding to the paymentID parameter
  *
  *  @param paymentID a payment identifier corresponding to the payment you'd like to retrieve
  *  @param success   Called when the operation completes successfully.
@@ -115,11 +117,26 @@ typedef void(^GetPaymentSuccess)(SPPayment*);
 -(void) getPaymentWithID:(NSInteger)paymentID success:(GetPaymentSuccess)success failure:(ResourceFailureBlock)failure;
 
 
+/**
+ Returns a JSON representation of the payment object. If you aren't processing payments directly from your iOS app, then you'll probably be passing around the result of this method.
+
+ @return A JSON representation of this object as an NSString. It is appropriate for use with the payment/simple API.
+ */
+-(NSString*) asJSON;
+
+/**
+ @return A representation of this payment as an NSDictionary. The key names are consistent w/ those necessary for payment through the payment/simple API.
+ 
+ @see asJSON
+ */
+-(NSDictionary *) asJSONObject;
+
 @property (nonatomic, strong)NSNumber * amount;
 @property (nonatomic, copy)NSString * notes;
 @property (nonatomic, copy)NSString * latitude;
 @property (nonatomic, copy)NSString * longitude;
 @property (readonly) NSNumber * paymentID;
+
 
 
 @end
