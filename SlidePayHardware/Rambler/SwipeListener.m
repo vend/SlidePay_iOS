@@ -80,11 +80,11 @@ static NSArray * keys = nil;
 - (void)onDecodeCompleted:(NSDictionary *)data;{
   
     NSLog(@"decode complete, swipe dict: %@",data);
-    NSDictionary * simplePaymentDict = @{SPKEY_KSN : data[KEY_KSN],
+    
+    NSDictionary * simplePaymentDict = @{SPKEY_KSN    : data[KEY_KSN],
                                          SPKEY_METHOD : @"CreditCard",
                                          SPKEY_TRACK1 : data[KEY_TRACK],
-                                         SPKEY_VENDOR : @"rambler",
-                                         SPKEY_NOTES  : @""
+                                         SPKEY_VENDOR : @"rambler"
                                          };
     
     NSLog(@"decode complete: %@",simplePaymentDict);

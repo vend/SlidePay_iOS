@@ -38,6 +38,7 @@
 @property (nonatomic) NSString * status_code;
 @property (nonatomic) NSString * status_message;
 @property (nonatomic) NSNumber * is_approved;
+@property (nonatomic) NSString * device_type;
 
 @property (nonatomic) RKObjectMapping *getMapping;
 
@@ -57,11 +58,12 @@
 
 -(id) initWithPaymentDictionary:(NSDictionary*)dictionary{
     if(self = [super init]){
-        NSString * ksn = [dictionary valueForKey:@"ksn"];
-        NSString * vendor = [dictionary valueForKey:@"vendor"];
-        NSString * serial = [dictionary valueForKey:@"serial"];
-        NSString * trackdata = [dictionary valueForKey:@"trackdata"];
+        NSString * ksn = [dictionary valueForKey:@"encryption_ksn"];
+        NSString * vendor = [dictionary valueForKey:@"encryption_vendor"];
+        NSString * serial = [dictionary valueForKey:@"encryption_device_serial"];
+        NSString * trackdata = [dictionary valueForKey:@"cc_track2data"];
         NSArray * additionalKeys = @[];
+        self.device_type = @"ios_sdk";
         if(serial){
             additionalKeys = @[@"encryption_device_serial"];
             self.encryption_device_serial = serial;
@@ -86,6 +88,7 @@
         self.cc_expiry_month = month;
         self.cc_expiry_year  = year;
         self.method = @"CreditCard";
+        self.device_type = @"ios_sdk";
         [self.objectManager addRequestDescriptor:[self keyedPaymentRequestDescriptor]];
         [self.objectManager addResponseDescriptor:[self makePaymentResponseDescriptor]];
         [self.objectManager addResponseDescriptor:[self getPaymentResponseDescriptor]];
@@ -123,7 +126,8 @@
                                                     @"transaction_state",
                                                     @"status_code",
                                                     @"status_message",
-                                                    @"is_approved"
+                                                    @"is_approved",
+                                                    @"device_type"
                                                     ]];
     [paymentMapping addAttributeMappingsFromDictionary:@{@"payment_id":@"paymentID"}];
     
@@ -179,7 +183,7 @@
     return [self requestDescriptorWithKeys:[self swipedRequestKeys]];
 }
 -(RKRequestDescriptor*)keyedPaymentRequestDescriptor{
-    return [self requestDescriptorWithKeys:[self keyedRequestKeys] ];
+    return [self requestDescriptorWithKeys:[self keyedRequestKeys]];
 }
 
 #pragma mark making a payment
@@ -261,23 +265,7 @@
         [SPRemoteResource responseSanityCheck:[SPRemoteResource responseFromOperation:operation.HTTPRequestOperation] errorCode:&errorCode errorMessage:&errorMessage];
         failure(errorCode ? errorCode.integerValue : 0,errorMessage,error);
     }];
-    /*
-    [self.objectManager getObject:self path:path parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-        NSLog(@"get payment request complete!");
-        NSLog(@"CC Redacted: %@",self.cc_redacted_number);
-        NSLog(@"CC name    : %@",self.cc_name_on_card);
-        NSLog(@"paymentID  : %@",self.paymentID);
-        success(self);
-    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-        NSNumber *errorCode;
-        NSString *errorMessage;
-        NSData * bodyData = operation.HTTPRequestOperation.request.HTTPBody;
-        NSString * bodyString = [[NSString alloc] initWithData:bodyData encoding:NSUTF8StringEncoding];
-        NSLog(@"body string: %@",bodyString);
-        [SPRemoteResource responseSanityCheck:[SPRemoteResource responseFromOperation:operation.HTTPRequestOperation] errorCode:&errorCode errorMessage:&errorMessage];
-        failure(errorCode ? errorCode.integerValue : 0,errorMessage,error);
-    }];
-    */
+
 }
 
 // =( because it was easier than trying to mod restkit
@@ -292,6 +280,38 @@
         [self setValue:sourceValue forKeyPath:propertyName];
     }
     free(properties);
+}
+
+#pragma mark Different Payment representations
+
+-(NSDictionary *) asJSONObject;{
+    
+    
+    RKRequestDescriptor *descriptor = [[self.objectManager requestDescriptors] firstObject];
+    if(!descriptor){ NSLog(@"no descriptor for object serialization"); return nil;}
+    
+    NSError * error;
+    NSDictionary * serializedObject = [RKObjectParameterization parametersWithObject:self requestDescriptor:descriptor error:&error];
+    if(error){
+        NSLog(@"WARNING *** Error while dictionary-ing payment.");
+        NSLog(@"        *** %@",error);
+        return nil;
+    }else{
+        return serializedObject;
+    }
+    
+}
+
+-(NSString *)asJSON{
+    NSDictionary * jsonDict = [self asJSONObject];
+    NSError * error;
+    NSData * jsonData = [RKMIMETypeSerialization dataFromObject:jsonDict MIMEType:RKMIMETypeJSON error:&error];
+    if(error){
+        NSLog(@"WARNING *** error while serializing payment");
+        NSLog(@"        *** %@",error);
+    }
+    NSString * jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    return jsonString;
 }
 
 

@@ -20,7 +20,7 @@
 //these are they keys present in the dictionary passed to the RamblerSwipeComplete block. The keys in this dictionary mirror those necessary to make a payment through the payment API.
 #define SPKEY_KSN      @"encryption_ksn"
 #define SPKEY_VENDOR   @"encryption_vendor"
-#define SPKEY_TRACK1   @"cc_track1data"
+#define SPKEY_TRACK1   @"cc_track2data"
 #define SPKEY_MONTH    @"cc_expiry_month"
 #define SPKEY_YEAR     @"cc_expiry_year"
 #define SPKEY_METHOD   @"method"
@@ -32,7 +32,7 @@ typedef enum RamblerState {
     DEVICE_UNPLUGGED        = 0,
     DEVICE_PLUGGED_IN       = 1,
     DEVICE_WAITING          = 2, //waiting for the device to be plugged in
-    DEVICE_IDLE             = 3, //
+    DEVICE_IDLE             = 3, //device has been stopped. Call -start to begin swiping
     DEVICE_WAITING_SWIPE    = 4, //waiting for a swipe
     DEVICE_RECORDING        = 5, //recording the swipe
     DEVICE_DECODING         = 6  //decoding the swipe
