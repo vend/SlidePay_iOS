@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/SlidePay/SlidePay_iOS"
   s.license      = 'LICENSE'
   s.authors      = { "SlidePay" => "api@slidepay.com", "Alex Garcia" => "alex@slidepay.com" }
-  s.platform     = :ios, '6.0'
+  s.platform     = :ios, '5.0'
   s.source       = {:git => "https://github.com/SlidePay/SlidePay_iOS.git", :tag => s.version}
   #s.source_files = 'SlidePayCore/','*.h','*.m'
   s.requires_arc = true
