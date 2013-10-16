@@ -17,6 +17,16 @@ static NSArray * keys = nil;
 
 @implementation SwipeListener
 
++ (SwipeListener *)sharedListener
+{
+    static dispatch_once_t p = 0;
+    __strong static id _sharedListener = nil;
+    dispatch_once(&p, ^{
+        _sharedListener = [[self alloc] init];
+    });
+    return _sharedListener;
+}
+
 -(id) init {
     if(self = [super init]){
         //keys = @[KEY_EXP,KEY_KSN,KEY_MASKED,KEY_NAME,KEY_TRACK];

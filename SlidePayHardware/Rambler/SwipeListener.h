@@ -48,6 +48,8 @@ typedef void(^RamblerSwipeComplete)(NSDictionary *swipe,int errorCode, NSString 
 @property (copy) RamblerSwipeComplete swipeCompleteBlock;
 @property (strong) ReaderController *readerController;
 
++ (SwipeListener *)sharedListener;
+
 -(void) start;
 -(void) stop;
 -(void) testSwipe;
